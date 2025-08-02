@@ -1,0 +1,677 @@
+            <p style="font-size: 1.2rem; line-height: 1.8;">
+                <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AIxBI – Revolutionary B2B AI, ML & BI Solutions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AIxBI delivers rapid, measurable B2B AI/ML and BI solutions for industry and government with a 30-minute demo and up to $10 million in value.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #000000;
+            color: #ffffff;
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* Animated background particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #00ffff;
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.8;
+            box-shadow: 0 0 10px #00ffff;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+        }
+        
+        /* Neural network background */
+        .neural-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.15;
+            background-image: 
+                radial-gradient(circle at 20% 80%, #00ffff 0%, transparent 60%),
+                radial-gradient(circle at 80% 20%, #ff0080 0%, transparent 60%),
+                radial-gradient(circle at 40% 40%, #00ff80 0%, transparent 60%),
+                radial-gradient(circle at 60% 70%, #8000ff 0%, transparent 60%);
+            animation: pulse 6s ease-in-out infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.1; transform: scale(1); }
+            100% { opacity: 0.2; transform: scale(1.1); }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Header with glassmorphism */
+        .header {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 20px;
+            margin: 2rem;
+            padding: 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 255, 255, 0.1);
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        /* Logo animation */
+        .logo-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        
+        .logo {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            background: linear-gradient(45deg, #00ffff, #ff0080, #00ff80, #8000ff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: rotate 10s linear infinite;
+            box-shadow: 0 0 60px rgba(0, 255, 255, 0.6), 0 0 100px rgba(255, 0, 128, 0.3);
+        }
+        
+        .logo::before {
+            content: 'AI×Bi';
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #000;
+            z-index: 2;
+            position: relative;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        
+        .logo::after {
+            content: '';
+            position: absolute;
+            inset: 4px;
+            background: radial-gradient(circle, #000000 0%, #111111 100%);
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .main-title {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #00ffff, #ff0080, #00ff80, #8000ff, #00ffff);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 4s ease-in-out infinite;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+        }
+        
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            color: #00ffff;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Sections with enhanced styling */
+        .section {
+            background: rgba(255, 255, 255, 0.01);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.15);
+            border-radius: 20px;
+            margin: 2rem;
+            padding: 3rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.2);
+            border-color: rgba(0, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        .section h2 {
+            font-size: 2.5rem;
+            color: #00ffff;
+            margin-bottom: 1.5rem;
+            position: relative;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+        
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(45deg, #00ffff, #ff0080);
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+        
+        /* Enhanced lists */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            background: rgba(0, 255, 255, 0.05);
+            margin: 1rem 0;
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid #00ffff;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+        }
+        
+        .feature-list li::before {
+            content: '🚀';
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+        
+        .feature-list li:hover {
+            transform: translateX(10px);
+            background: rgba(0, 255, 255, 0.1);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.2);
+            border-color: rgba(0, 255, 255, 0.3);
+        }
+        
+        /* Steps with interactive design */
+        .steps {
+            counter-reset: step-counter;
+            list-style: none;
+            padding: 0;
+        }
+        
+        .steps li {
+            counter-increment: step-counter;
+            position: relative;
+            padding: 2rem 2rem 2rem 5rem;
+            margin: 2rem 0;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.08), rgba(255, 0, 128, 0.08));
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+        }
+        
+        .steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3rem;
+            height: 3rem;
+            background: linear-gradient(45deg, #00ffff, #ff0080);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #000;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+        
+        .steps li:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 255, 255, 0.2);
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.12), rgba(255, 0, 128, 0.12));
+        }
+        
+        /* Quote with enhanced styling */
+        .testimonial {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.08), rgba(255, 0, 128, 0.08));
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 2rem;
+            position: relative;
+            font-size: 1.2rem;
+            font-style: italic;
+            text-align: center;
+        }
+        
+        .testimonial::before {
+            content: '"';
+            font-size: 5rem;
+            color: #00ffff;
+            position: absolute;
+            top: -1rem;
+            left: 2rem;
+            opacity: 0.4;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #00ffff, #ff0080, #00ff80);
+            margin: 3rem 2rem;
+            padding: 4rem;
+            border-radius: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 255, 255, 0.3);
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        .cta-title {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #000;
+            margin-bottom: 2rem;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .cta-btn {
+            background: rgba(0, 0, 0, 0.9);
+            color: #00ffff;
+            font-weight: 900;
+            padding: 1.5rem 3rem;
+            border: 2px solid #00ffff;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+        }
+        
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: #00ffff;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+        
+        .cta-btn:hover {
+            color: #000;
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.4);
+        }
+        
+        .cta-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        /* Contact section */
+        .contact {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            margin: 2rem;
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-item {
+            background: rgba(0, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-5px);
+            background: rgba(0, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+        }
+        
+        .contact-item h4 {
+            color: #00ffff;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+        
+        .contact-item a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-item a:hover {
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .logo {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .logo::before {
+                font-size: 2rem;
+            }
+            
+            .section {
+                margin: 1rem;
+                padding: 2rem;
+            }
+            
+            .header {
+                margin: 1rem;
+                padding: 2rem;
+            }
+            
+            .cta-section {
+                margin: 1rem;
+                padding: 2rem;
+            }
+            
+            .cta-title {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated background elements -->
+    <div class="neural-bg"></div>
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header fade-in">
+            <div class="logo-container">
+                <div class="logo"></div>
+            </div>
+            <h1 class="main-title">AIxBI</h1>
+            <div class="tagline">Revolutionary B2B AI, ML, and BI Solutions</div>
+            <p style="font-size: 1.3rem; color: #ffffff; opacity: 0.9;">
+                Transform your business challenges into <strong style="color: #00ffff;">$10 Million+</strong> in measurable ROI
+            </p>
+        </div>
+
+        <!-- Value Proposition -->
+        <div class="section fade-in">
+            <h2>💎 Unlock Extraordinary Value</h2>
+            <p style="font-size: 1.2rem; line-height: 1.8;">
+                At <strong style="color: #00d9ff;">AIxBI</strong>, we don't just solve problems—we create <strong>business transformation</strong>. 
+                Our cutting-edge AI/ML solutions deliver guaranteed <strong style="color: #ff6b6b;">$10 million</strong> in new revenue or cost savings. 
+                No complexity, no delays—just pure, measurable impact.
+            </p>
+        </div>
+
+        <!-- Why Choose Us -->
+        <div class="section fade-in">
+            <h2>🚀 Why Industry Leaders Choose AIxBI</h2>
+            <ul class="feature-list">
+                <li><strong>Lightning-Fast Demos:</strong> See your custom solution in action within <strong>30 minutes</strong></li>
+                <li><strong>Universal Expertise:</strong> We excel across all industries and government sectors</li>
+                <li><strong>Seamless Integration:</strong> Bring us your challenge—we handle the entire journey</li>
+                <li><strong>Transparent Value:</strong> Solutions scaled from <strong>$100 to $10 million</strong>, always ROI-first</li>
+                <li><strong>Focus Amplification:</strong> Your team drives growth, we deliver the AI advantage</li>
+            </ul>
+        </div>
+
+        <!-- Process -->
+        <div class="section fade-in">
+            <h2>⚡ Our Revolutionary Process</h2>
+            <ol class="steps">
+                <li><strong>Share Your Challenge:</strong> Describe your business problem in plain language—no technical jargon needed</li>
+                <li><strong>Witness the Magic:</strong> Experience a live, tailored demo in just 30 minutes</li>
+                <li><strong>End-to-End Delivery:</strong> We design, build, deploy, and manage your custom AI/ML/BI systems</li>
+                <li><strong>Measure Success:</strong> Track transparent, real-world impact on revenue and costs</li>
+            </ol>
+        </div>
+
+        <!-- Services -->
+        <div class="section fade-in">
+            <h2>🎯 Our Core Capabilities</h2>
+            <ul class="feature-list">
+                <li><strong>AI & ML Consulting:</strong> Strategic vision to deployment excellence</li>
+                <li><strong>Data Engineering:</strong> Seamless integration with your existing ecosystem</li>
+                <li><strong>Business Intelligence:</strong> Advanced analytics that empower decision-makers</li>
+                <li><strong>Rapid Prototyping:</strong> Test concepts, validate value, scale with confidence</li>
+                <li><strong>Managed AI Services:</strong> Fully optimized, hands-off AI deployments</li>
+            </ul>
+        </div>
+
+        <!-- Testimonial -->
+        <div class="testimonial fade-in">
+            With AIxBI, we were to accelerate from  $10000 to $10 million in value, with AIxBI expertise , they delivers—fast.
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section fade-in">
+            <h2 class="cta-title">Ready for Transformation?</h2>
+            <p style="font-size: 1.4rem; color: #000; margin-bottom: 2rem; font-weight: 600;">
+                Join industry leaders who've unlocked millions in value
+            </p>
+            <a href="mailto:sales@aixbi.net?subject=Request%20Demo" class="cta-btn">
+                🚀 Get Your 30-Minute Demo
+            </a>
+        </div>
+
+        <!-- Contact -->
+        <div class="contact fade-in">
+            <h2 style="color: #00d9ff; margin-bottom: 2rem;">Connect with Our Experts</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <h4>📧 Email</h4>
+                    <a href="mailto:sales@aixbi.net">sales@aixbi.net</a>
+                </div>
+                <div class="contact-item">
+                    <h4>📞 Phone</h4>
+                    <a href="tel:+91-997-1315-556">+91-997-1315-556</a>
+                </div>
+                <div class="contact-item">
+                    <h4>🌍 Global Reach</h4>
+                    <p>Worldwide Delivery, Local Expertise</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align:center; color:#666; margin: 3rem 0; font-size:0.9rem;">
+            © 2025 AIxBI. Transforming Business Through AI Excellence. All rights reserved.
+        </div>
+    </div>
+
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Scroll animations
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.fade-in');
+            const windowHeight = window.innerHeight;
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            handleScrollAnimations();
+            
+            // Add scroll listener
+            window.addEventListener('scroll', handleScrollAnimations);
+            
+            // Add hover effects to sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                section.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
+        
+        // Add interactive cursor trail effect
+        document.addEventListener('mousemove', function(e) {
+            const trail = document.createElement('div');
+            trail.style.position = 'fixed';
+            trail.style.left = e.clientX + 'px';
+            trail.style.top = e.clientY + 'px';
+            trail.style.width = '4px';
+            trail.style.height = '4px';
+            trail.style.background = '#00d9ff';
+            trail.style.borderRadius = '50%';
+            trail.style.pointerEvents = 'none';
+            trail.style.zIndex = '9999';
+            trail.style.opacity = '0.6';
+            trail.style.transition = 'all 0.5s ease';
+            
+            document.body.appendChild(trail);
+            
+            setTimeout(() => {
+                trail.style.opacity = '0';
+                trail.style.transform = 'scale(0)';
+                setTimeout(() => trail.remove(), 500);
+            }, 100);
+        });
+    </script>
+</body>
+</html>
