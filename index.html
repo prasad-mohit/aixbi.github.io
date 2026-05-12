@@ -1,677 +1,798 @@
-            <p style="font-size: 1.2rem; line-height: 1.8;">
-                <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>AIxBI – Revolutionary B2B AI, ML & BI Solutions</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AIxBI delivers rapid, measurable B2B AI/ML and BI solutions for industry and government with a 30-minute demo and up to $10 million in value.">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            background: #000000;
-            color: #ffffff;
-            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-        
-        /* Animated background particles */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            pointer-events: none;
-        }
-        
-        .particle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: #00ffff;
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
-            opacity: 0.8;
-            box-shadow: 0 0 10px #00ffff;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
-            50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
-        }
-        
-        /* Neural network background */
-        .neural-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            opacity: 0.15;
-            background-image: 
-                radial-gradient(circle at 20% 80%, #00ffff 0%, transparent 60%),
-                radial-gradient(circle at 80% 20%, #ff0080 0%, transparent 60%),
-                radial-gradient(circle at 40% 40%, #00ff80 0%, transparent 60%),
-                radial-gradient(circle at 60% 70%, #8000ff 0%, transparent 60%);
-            animation: pulse 6s ease-in-out infinite alternate;
-        }
-        
-        @keyframes pulse {
-            0% { opacity: 0.1; transform: scale(1); }
-            100% { opacity: 0.2; transform: scale(1.1); }
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 10;
-        }
-        
-        /* Header with glassmorphism */
-        .header {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            border-radius: 20px;
-            margin: 2rem;
-            padding: 3rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 8px 32px rgba(0, 255, 255, 0.1);
-        }
-        
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
-            animation: shimmer 3s infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-        
-        /* Logo animation */
-        .logo-container {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 2rem;
-        }
-        
-        .logo {
-            width: 200px;
-            height: 200px;
-            position: relative;
-            background: linear-gradient(45deg, #00ffff, #ff0080, #00ff80, #8000ff);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: rotate 10s linear infinite;
-            box-shadow: 0 0 60px rgba(0, 255, 255, 0.6), 0 0 100px rgba(255, 0, 128, 0.3);
-        }
-        
-        .logo::before {
-            content: 'AI×Bi';
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: #000;
-            z-index: 2;
-            position: relative;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        }
-        
-        .logo::after {
-            content: '';
-            position: absolute;
-            inset: 4px;
-            background: radial-gradient(circle, #000000 0%, #111111 100%);
-            border-radius: 50%;
-            z-index: 1;
-        }
-        
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .main-title {
-            font-size: 4rem;
-            font-weight: 900;
-            background: linear-gradient(45deg, #00ffff, #ff0080, #00ff80, #8000ff, #00ffff);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradient-shift 4s ease-in-out infinite;
-            margin-bottom: 1rem;
-            text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
-        }
-        
-        @keyframes gradient-shift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        .tagline {
-            font-size: 1.5rem;
-            color: #00ffff;
-            margin-bottom: 2rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 0.5s forwards;
-            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-        }
-        
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* Sections with enhanced styling */
-        .section {
-            background: rgba(255, 255, 255, 0.01);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 255, 255, 0.15);
-            border-radius: 20px;
-            margin: 2rem;
-            padding: 3rem;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        
-        .section:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.2);
-            border-color: rgba(0, 255, 255, 0.4);
-            background: rgba(255, 255, 255, 0.02);
-        }
-        
-        .section h2 {
-            font-size: 2.5rem;
-            color: #00ffff;
-            margin-bottom: 1.5rem;
-            position: relative;
-            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-        }
-        
-        .section h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(45deg, #00ffff, #ff0080);
-            border-radius: 2px;
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-        }
-        
-        /* Enhanced lists */
-        .feature-list {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .feature-list li {
-            background: rgba(0, 255, 255, 0.05);
-            margin: 1rem 0;
-            padding: 1.5rem;
-            border-radius: 15px;
-            border-left: 4px solid #00ffff;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(0, 255, 255, 0.1);
-        }
-        
-        .feature-list li::before {
-            content: '🚀';
-            font-size: 1.5rem;
-            margin-right: 1rem;
-        }
-        
-        .feature-list li:hover {
-            transform: translateX(10px);
-            background: rgba(0, 255, 255, 0.1);
-            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.2);
-            border-color: rgba(0, 255, 255, 0.3);
-        }
-        
-        /* Steps with interactive design */
-        .steps {
-            counter-reset: step-counter;
-            list-style: none;
-            padding: 0;
-        }
-        
-        .steps li {
-            counter-increment: step-counter;
-            position: relative;
-            padding: 2rem 2rem 2rem 5rem;
-            margin: 2rem 0;
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.08), rgba(255, 0, 128, 0.08));
-            border-radius: 20px;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(0, 255, 255, 0.1);
-        }
-        
-        .steps li::before {
-            content: counter(step-counter);
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 3rem;
-            height: 3rem;
-            background: linear-gradient(45deg, #00ffff, #ff0080);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: #000;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-        }
-        
-        .steps li:hover {
-            transform: scale(1.02);
-            box-shadow: 0 15px 30px rgba(0, 255, 255, 0.2);
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.12), rgba(255, 0, 128, 0.12));
-        }
-        
-        /* Quote with enhanced styling */
-        .testimonial {
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.08), rgba(255, 0, 128, 0.08));
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            border-radius: 20px;
-            padding: 3rem;
-            margin: 3rem 2rem;
-            position: relative;
-            font-size: 1.2rem;
-            font-style: italic;
-            text-align: center;
-        }
-        
-        .testimonial::before {
-            content: '"';
-            font-size: 5rem;
-            color: #00ffff;
-            position: absolute;
-            top: -1rem;
-            left: 2rem;
-            opacity: 0.4;
-            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-        }
-        
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(135deg, #00ffff, #ff0080, #00ff80);
-            margin: 3rem 2rem;
-            padding: 4rem;
-            border-radius: 30px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 255, 255, 0.3);
-        }
-        
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-        }
-        
-        .cta-title {
-            font-size: 3rem;
-            font-weight: 900;
-            color: #000;
-            margin-bottom: 2rem;
-            z-index: 2;
-            position: relative;
-        }
-        
-        .cta-btn {
-            background: rgba(0, 0, 0, 0.9);
-            color: #00ffff;
-            font-weight: 900;
-            padding: 1.5rem 3rem;
-            border: 2px solid #00ffff;
-            border-radius: 50px;
-            font-size: 1.3rem;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 2;
-            overflow: hidden;
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
-        }
-        
-        .cta-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: #00ffff;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            transform: translate(-50%, -50%);
-            z-index: -1;
-        }
-        
-        .cta-btn:hover {
-            color: #000;
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.4);
-        }
-        
-        .cta-btn:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-        
-        /* Contact section */
-        .contact {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(10px);
-            margin: 2rem;
-            padding: 3rem;
-            border-radius: 20px;
-            text-align: center;
-            border: 1px solid rgba(0, 255, 255, 0.1);
-        }
-        
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        
-        .contact-item {
-            background: rgba(0, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 15px;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(0, 255, 255, 0.1);
-        }
-        
-        .contact-item:hover {
-            transform: translateY(-5px);
-            background: rgba(0, 255, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
-        }
-        
-        .contact-item h4 {
-            color: #00ffff;
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-        }
-        
-        .contact-item a {
-            color: #ffffff;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .contact-item a:hover {
-            color: #00ffff;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-        }
-        
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .main-title {
-                font-size: 2.5rem;
-            }
-            
-            .logo {
-                width: 150px;
-                height: 150px;
-            }
-            
-            .logo::before {
-                font-size: 2rem;
-            }
-            
-            .section {
-                margin: 1rem;
-                padding: 2rem;
-            }
-            
-            .header {
-                margin: 1rem;
-                padding: 2rem;
-            }
-            
-            .cta-section {
-                margin: 1rem;
-                padding: 2rem;
-            }
-            
-            .cta-title {
-                font-size: 2rem;
-            }
-        }
-        
-        /* Scroll animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-        
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AIxBI — AI & Business Intelligence company delivering value through intelligent technology, GenAI, full-stack development, and consulting for Healthcare, BFSI, Telecom, Retail and Public Sector." />
+  <meta name="keywords" content="AI, Business Intelligence, GenAI, Machine Learning, Full Stack, BFSI, Healthcare, Telecom, Retail, Public Sector, Noida, India" />
+  <title>AIxBI — AI × Business Intelligence | Value-First Technology</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <!-- Animated background elements -->
-    <div class="neural-bg"></div>
-    <div class="particles" id="particles"></div>
 
-    <div class="container">
-        <!-- Header Section -->
-        <div class="header fade-in">
-            <div class="logo-container">
-                <div class="logo"></div>
-            </div>
-            <h1 class="main-title">AIxBI</h1>
-            <div class="tagline">Revolutionary B2B AI, ML, and BI Solutions</div>
-            <p style="font-size: 1.3rem; color: #ffffff; opacity: 0.9;">
-                Transform your business challenges into <strong style="color: #00ffff;">$10 Million+</strong> in measurable ROI
-            </p>
-        </div>
+<!-- ══════════════ NAVBAR ══════════════ -->
+<header id="navbar">
+  <nav class="nav-container">
+    <a href="#home" class="nav-logo">
+      <svg class="logo-svg" viewBox="0 0 170 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="AIxBI Logo">
+        <text x="0" y="36" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="38" fill="url(#logoGrad)">AI</text>
+        <text x="58" y="34" font-family="Space Grotesk, sans-serif" font-weight="300" font-size="28" fill="#94a3b8">×</text>
+        <text x="80" y="36" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="38" fill="url(#logoGrad2)">BI</text>
+        <circle cx="152" cy="8" r="4" fill="#6366f1" opacity="0.9"/>
+        <circle cx="161" cy="18" r="2.5" fill="#0ea5e9" opacity="0.7"/>
+        <line x1="152" y1="11" x2="160" y2="17" stroke="#6366f1" stroke-width="1.2" opacity="0.6"/>
+        <defs>
+          <linearGradient id="logoGrad" x1="0" y1="0" x2="60" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#0ea5e9"/>
+            <stop offset="100%" stop-color="#6366f1"/>
+          </linearGradient>
+          <linearGradient id="logoGrad2" x1="80" y1="0" x2="130" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#6366f1"/>
+            <stop offset="100%" stop-color="#8b5cf6"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </a>
 
-        <!-- Value Proposition -->
-        <div class="section fade-in">
-            <h2>💎 Unlock Extraordinary Value</h2>
-            <p style="font-size: 1.2rem; line-height: 1.8;">
-                At <strong style="color: #00d9ff;">AIxBI</strong>, we don't just solve problems—we create <strong>business transformation</strong>. 
-                Our cutting-edge AI/ML solutions deliver guaranteed <strong style="color: #ff6b6b;">$10 million</strong> in new revenue or cost savings. 
-                No complexity, no delays—just pure, measurable impact.
-            </p>
-        </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#industries">Industries</a></li>
+      <li><a href="#value">Why Us</a></li>
+      <li><a href="#tech">Tech</a></li>
+      <li><a href="#contact" class="nav-cta">Talk to Us</a></li>
+    </ul>
 
-        <!-- Why Choose Us -->
-        <div class="section fade-in">
-            <h2>🚀 Why Industry Leaders Choose AIxBI</h2>
-            <ul class="feature-list">
-                <li><strong>Lightning-Fast Demos:</strong> See your custom solution in action within <strong>30 minutes</strong></li>
-                <li><strong>Universal Expertise:</strong> We excel across all industries and government sectors</li>
-                <li><strong>Seamless Integration:</strong> Bring us your challenge—we handle the entire journey</li>
-                <li><strong>Transparent Value:</strong> Solutions scaled from <strong>$100 to $10 million</strong>, always ROI-first</li>
-                <li><strong>Focus Amplification:</strong> Your team drives growth, we deliver the AI advantage</li>
-            </ul>
-        </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
 
-        <!-- Process -->
-        <div class="section fade-in">
-            <h2>⚡ Our Revolutionary Process</h2>
-            <ol class="steps">
-                <li><strong>Share Your Challenge:</strong> Describe your business problem in plain language—no technical jargon needed</li>
-                <li><strong>Witness the Magic:</strong> Experience a live, tailored demo in just 30 minutes</li>
-                <li><strong>End-to-End Delivery:</strong> We design, build, deploy, and manage your custom AI/ML/BI systems</li>
-                <li><strong>Measure Success:</strong> Track transparent, real-world impact on revenue and costs</li>
-            </ol>
-        </div>
+<!-- ══════════════ HERO ══════════════ -->
+<section id="home" class="hero">
+  <canvas id="heroCanvas"></canvas>
 
-        <!-- Services -->
-        <div class="section fade-in">
-            <h2>🎯 Our Core Capabilities</h2>
-            <ul class="feature-list">
-                <li><strong>AI & ML Consulting:</strong> Strategic vision to deployment excellence</li>
-                <li><strong>Data Engineering:</strong> Seamless integration with your existing ecosystem</li>
-                <li><strong>Business Intelligence:</strong> Advanced analytics that empower decision-makers</li>
-                <li><strong>Rapid Prototyping:</strong> Test concepts, validate value, scale with confidence</li>
-                <li><strong>Managed AI Services:</strong> Fully optimized, hands-off AI deployments</li>
-            </ul>
-        </div>
-
-        <!-- Testimonial -->
-        <div class="testimonial fade-in">
-            With AIxBI, we were to accelerate from  $10000 to $10 million in value, with AIxBI expertise , they delivers—fast.
-        </div>
-
-        <!-- CTA Section -->
-        <div class="cta-section fade-in">
-            <h2 class="cta-title">Ready for Transformation?</h2>
-            <p style="font-size: 1.4rem; color: #000; margin-bottom: 2rem; font-weight: 600;">
-                Join industry leaders who've unlocked millions in value
-            </p>
-            <a href="mailto:sales@aixbi.net?subject=Request%20Demo" class="cta-btn">
-                🚀 Get Your 30-Minute Demo
-            </a>
-        </div>
-
-        <!-- Contact -->
-        <div class="contact fade-in">
-            <h2 style="color: #00d9ff; margin-bottom: 2rem;">Connect with Our Experts</h2>
-            <div class="contact-grid">
-                <div class="contact-item">
-                    <h4>📧 Email</h4>
-                    <a href="mailto:sales@aixbi.net">sales@aixbi.net</a>
-                </div>
-                <div class="contact-item">
-                    <h4>📞 Phone</h4>
-                    <a href="tel:+91-997-1315-556">+91-997-1315-556</a>
-                </div>
-                <div class="contact-item">
-                    <h4>🌍 Global Reach</h4>
-                    <p>Worldwide Delivery, Local Expertise</p>
-                </div>
-            </div>
-        </div>
-
-        <div style="text-align:center; color:#666; margin: 3rem 0; font-size:0.9rem;">
-            © 2025 AIxBI. Transforming Business Through AI Excellence. All rights reserved.
-        </div>
+  <div class="hero-content">
+    <div class="hero-badge animate-fade-up">
+      <span class="badge-dot"></span>
+      AI &middot; ML &middot; GenAI &middot; BI &middot; Full Stack
     </div>
 
-    <script>
-        // Create floating particles
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 50;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 6 + 's';
-                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
-                particlesContainer.appendChild(particle);
-            }
-        }
-        
-        // Scroll animations
-        function handleScrollAnimations() {
-            const elements = document.querySelectorAll('.fade-in');
-            const windowHeight = window.innerHeight;
-            
-            elements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < windowHeight - elementVisible) {
-                    element.classList.add('visible');
-                }
-            });
-        }
-        
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            createParticles();
-            handleScrollAnimations();
-            
-            // Add scroll listener
-            window.addEventListener('scroll', handleScrollAnimations);
-            
-            // Add hover effects to sections
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(section => {
-                section.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-10px) scale(1.02)';
-                });
-                
-                section.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) scale(1)';
-                });
-            });
-        });
-        
-        // Add interactive cursor trail effect
-        document.addEventListener('mousemove', function(e) {
-            const trail = document.createElement('div');
-            trail.style.position = 'fixed';
-            trail.style.left = e.clientX + 'px';
-            trail.style.top = e.clientY + 'px';
-            trail.style.width = '4px';
-            trail.style.height = '4px';
-            trail.style.background = '#00d9ff';
-            trail.style.borderRadius = '50%';
-            trail.style.pointerEvents = 'none';
-            trail.style.zIndex = '9999';
-            trail.style.opacity = '0.6';
-            trail.style.transition = 'all 0.5s ease';
-            
-            document.body.appendChild(trail);
-            
-            setTimeout(() => {
-                trail.style.opacity = '0';
-                trail.style.transform = 'scale(0)';
-                setTimeout(() => trail.remove(), 500);
-            }, 100);
-        });
-    </script>
+    <h1 class="hero-title animate-fade-up delay-1">
+      Where <span class="grad-text">Artificial Intelligence</span><br/>
+      Meets <span class="grad-text2">Real Business Value</span>
+    </h1>
+
+    <p class="hero-sub animate-fade-up delay-2">
+      AIxBI builds intelligent systems that don&rsquo;t just look smart &mdash; they generate measurable outcomes.
+      From GenAI pipelines to enterprise BI platforms and full-stack AI-native applications,
+      we architect the future of your industry.
+    </p>
+
+    <div class="hero-actions animate-fade-up delay-3">
+      <a href="#contact" class="btn btn-primary">
+        <i class="fa-solid fa-rocket"></i> Start a Project
+      </a>
+      <a href="#services" class="btn btn-ghost">
+        Explore Services <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+
+    <div class="hero-stats animate-fade-up delay-4">
+      <div class="hero-stat">
+        <span class="stat-n">15<span class="plus">+</span></span>
+        <span class="stat-l">Years Expertise</span>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="hero-stat">
+        <span class="stat-n">5</span>
+        <span class="stat-l">Industries Served</span>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="hero-stat">
+        <span class="stat-n">100<span class="plus">%</span></span>
+        <span class="stat-l">AI-Native Focus</span>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="hero-stat">
+        <span class="stat-n">Senior</span>
+        <span class="stat-l">Practitioners Only</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-graphic">
+    <div class="orbit-ring ring-1"></div>
+    <div class="orbit-ring ring-2"></div>
+    <div class="orbit-ring ring-3"></div>
+    <div class="orbit-center">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="48" stroke="url(#orbGrad)" stroke-width="1.2" stroke-dasharray="6 4"/>
+        <circle cx="50" cy="50" r="32" fill="url(#coreGrad)" opacity="0.95"/>
+        <text x="50" y="55" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="13" fill="white" text-anchor="middle">AI&times;BI</text>
+        <defs>
+          <linearGradient id="orbGrad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#0ea5e9"/>
+            <stop offset="100%" stop-color="#8b5cf6"/>
+          </linearGradient>
+          <radialGradient id="coreGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#6366f1"/>
+            <stop offset="100%" stop-color="#0ea5e9"/>
+          </radialGradient>
+        </defs>
+      </svg>
+    </div>
+    <div class="orbit-node n1"><i class="fa-solid fa-brain"></i></div>
+    <div class="orbit-node n2"><i class="fa-solid fa-chart-line"></i></div>
+    <div class="orbit-node n3"><i class="fa-solid fa-microchip"></i></div>
+    <div class="orbit-node n4"><i class="fa-solid fa-database"></i></div>
+    <div class="orbit-node n5"><i class="fa-solid fa-code"></i></div>
+    <div class="orbit-node n6"><i class="fa-solid fa-shield-halved"></i></div>
+  </div>
+</section>
+
+<!-- ══════════════ MARQUEE STRIP ══════════════ -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span>Generative AI</span><span class="mdot">&bull;</span>
+    <span>Business Intelligence</span><span class="mdot">&bull;</span>
+    <span>Machine Learning</span><span class="mdot">&bull;</span>
+    <span>Full-Stack Development</span><span class="mdot">&bull;</span>
+    <span>MLOps</span><span class="mdot">&bull;</span>
+    <span>Computer Vision</span><span class="mdot">&bull;</span>
+    <span>NLP</span><span class="mdot">&bull;</span>
+    <span>Data Engineering</span><span class="mdot">&bull;</span>
+    <span>AI Consulting</span><span class="mdot">&bull;</span>
+    <span>Value Architecture</span><span class="mdot">&bull;</span>
+    <!-- duplicate for seamless loop -->
+    <span>Generative AI</span><span class="mdot">&bull;</span>
+    <span>Business Intelligence</span><span class="mdot">&bull;</span>
+    <span>Machine Learning</span><span class="mdot">&bull;</span>
+    <span>Full-Stack Development</span><span class="mdot">&bull;</span>
+    <span>MLOps</span><span class="mdot">&bull;</span>
+    <span>Computer Vision</span><span class="mdot">&bull;</span>
+    <span>NLP</span><span class="mdot">&bull;</span>
+    <span>Data Engineering</span><span class="mdot">&bull;</span>
+    <span>AI Consulting</span><span class="mdot">&bull;</span>
+    <span>Value Architecture</span><span class="mdot">&bull;</span>
+  </div>
+</div>
+
+<!-- ══════════════ ABOUT ══════════════ -->
+<section id="about" class="section about-section">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-left reveal">
+        <div class="section-tag">Who We Are</div>
+        <h2 class="section-h2">Not a Software Shop.<br/><span class="grad-text">A Value Engine.</span></h2>
+        <p>AIxBI is a boutique, senior-led AI and Business Intelligence company headquartered in Noida, India. Every engagement is owned end-to-end by practitioners with 15+ years of real-world AI, data, and architecture experience.</p>
+        <p style="margin-top:16px;">Our core differentiator is simple: <strong>we measure success in business value delivered, not in lines of code written.</strong> Whether it&rsquo;s a GenAI assistant that cuts your customer support cost by 40%, a BI platform that gives your leadership real-time clarity across 200 branches, or an AI credit engine that halves your NPA &mdash; we build to generate ROI you can quantify on Day 1.</p>
+        <div class="about-pills">
+          <span class="pill">AI-Native</span>
+          <span class="pill">Value-First</span>
+          <span class="pill">Senior Practitioners</span>
+          <span class="pill">Full IP Transfer</span>
+          <span class="pill">On-Premise Ready</span>
+        </div>
+        <a href="#contact" class="btn btn-primary" style="margin-top:32px; display:inline-flex;">
+          <i class="fa-solid fa-handshake"></i> Let&rsquo;s Talk Value
+        </a>
+      </div>
+
+      <div class="about-right reveal delay-1">
+        <div class="about-card-grid">
+          <div class="about-kpi">
+            <div class="kpi-icon" style="--c:#0ea5e9"><i class="fa-solid fa-users"></i></div>
+            <div class="kpi-num">10&ndash;20</div>
+            <div class="kpi-lbl">Expert Team Size</div>
+          </div>
+          <div class="about-kpi">
+            <div class="kpi-icon" style="--c:#6366f1"><i class="fa-solid fa-calendar-check"></i></div>
+            <div class="kpi-num">15+</div>
+            <div class="kpi-lbl">Avg. Years per Person</div>
+          </div>
+          <div class="about-kpi">
+            <div class="kpi-icon" style="--c:#8b5cf6"><i class="fa-solid fa-industry"></i></div>
+            <div class="kpi-num">5</div>
+            <div class="kpi-lbl">Verticals Mastered</div>
+          </div>
+          <div class="about-kpi">
+            <div class="kpi-icon" style="--c:#10b981"><i class="fa-solid fa-chart-line"></i></div>
+            <div class="kpi-num">300%+</div>
+            <div class="kpi-lbl">Avg Client ROI</div>
+          </div>
+        </div>
+        <div class="about-quote">
+          <i class="fa-solid fa-quote-left quote-icon"></i>
+          <p>&ldquo;Small enough to be agile. Senior enough to deliver production-grade AI from Day 1. No junior fat. No billing bloat.&rdquo;</p>
+          <div class="quote-attr">&mdash; AIxBI Founding Principle</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ SERVICES ══════════════ -->
+<section id="services" class="section services-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">What We Build</div>
+      <h2 class="section-h2">Our <span class="grad-text">Services</span></h2>
+      <p class="section-desc">From first proof-of-concept to full-scale production deployment &mdash; we cover the entire intelligent technology lifecycle.</p>
+    </div>
+
+    <div class="services-grid">
+
+      <div class="service-card reveal featured-card">
+        <div class="service-glow"></div>
+        <div class="service-icon-wrap" style="--c1:#0ea5e9;--c2:#6366f1">
+          <i class="fa-solid fa-brain"></i>
+        </div>
+        <h3>AI / ML &amp; GenAI</h3>
+        <p>Custom large language models, fine-tuned domain AI, computer vision, NLP, and predictive analytics &mdash; all built on your data, for your outcomes.</p>
+        <ul class="service-list">
+          <li><i class="fa-solid fa-check"></i> LLM Fine-tuning &amp; RAG Pipelines</li>
+          <li><i class="fa-solid fa-check"></i> Predictive &amp; Prescriptive ML</li>
+          <li><i class="fa-solid fa-check"></i> Computer Vision &amp; OCR</li>
+          <li><i class="fa-solid fa-check"></i> NLP &mdash; Hindi &amp; Domain-specific</li>
+          <li><i class="fa-solid fa-check"></i> GenAI Assistants &amp; Copilots</li>
+        </ul>
+        <a href="#contact" class="service-link">Explore <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+      <div class="service-card reveal delay-1">
+        <div class="service-glow"></div>
+        <div class="service-icon-wrap" style="--c1:#6366f1;--c2:#8b5cf6">
+          <i class="fa-solid fa-chart-bar"></i>
+        </div>
+        <h3>Business Intelligence</h3>
+        <p>Real-time executive dashboards, self-serve analytics platforms, and intelligent reporting that transforms raw data into competitive advantage.</p>
+        <ul class="service-list">
+          <li><i class="fa-solid fa-check"></i> Real-time &amp; Embedded BI</li>
+          <li><i class="fa-solid fa-check"></i> KPI Dashboards &amp; Scorecards</li>
+          <li><i class="fa-solid fa-check"></i> Predictive Analytics</li>
+          <li><i class="fa-solid fa-check"></i> Data Warehouse Engineering</li>
+          <li><i class="fa-solid fa-check"></i> ETL / ELT Pipelines</li>
+        </ul>
+        <a href="#contact" class="service-link">Explore <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+      <div class="service-card reveal delay-2">
+        <div class="service-glow"></div>
+        <div class="service-icon-wrap" style="--c1:#10b981;--c2:#0ea5e9">
+          <i class="fa-solid fa-layer-group"></i>
+        </div>
+        <h3>Full-Stack AI Applications</h3>
+        <p>Modern, performant applications with AI baked in &mdash; not bolted on. React frontends, FastAPI backends, cloud-native or on-premise.</p>
+        <ul class="service-list">
+          <li><i class="fa-solid fa-check"></i> React / Next.js Web Apps</li>
+          <li><i class="fa-solid fa-check"></i> iOS &amp; Android Mobile Apps</li>
+          <li><i class="fa-solid fa-check"></i> REST / GraphQL / gRPC APIs</li>
+          <li><i class="fa-solid fa-check"></i> Microservices Architecture</li>
+          <li><i class="fa-solid fa-check"></i> AI-first UX Design</li>
+        </ul>
+        <a href="#contact" class="service-link">Explore <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+      <div class="service-card reveal delay-1">
+        <div class="service-glow"></div>
+        <div class="service-icon-wrap" style="--c1:#f59e0b;--c2:#ef4444">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <h3>MLOps &amp; DevSecOps</h3>
+        <p>Production-grade ML operations, automated CI/CD, model monitoring, drift detection and secure cloud infrastructure that keeps your AI running 24/7.</p>
+        <ul class="service-list">
+          <li><i class="fa-solid fa-check"></i> MLflow &amp; Model Registry</li>
+          <li><i class="fa-solid fa-check"></i> Kubernetes / Docker Orchestration</li>
+          <li><i class="fa-solid fa-check"></i> GitHub Actions CI/CD</li>
+          <li><i class="fa-solid fa-check"></i> Model Monitoring &amp; Alerting</li>
+          <li><i class="fa-solid fa-check"></i> RBI / ISO 27001 Compliance</li>
+        </ul>
+        <a href="#contact" class="service-link">Explore <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+      <div class="service-card reveal delay-2">
+        <div class="service-glow"></div>
+        <div class="service-icon-wrap" style="--c1:#8b5cf6;--c2:#6366f1">
+          <i class="fa-solid fa-lightbulb"></i>
+        </div>
+        <h3>AI Strategy &amp; Consulting</h3>
+        <p>We sit with your leadership, map your data landscape, and deliver an AI roadmap with clear ROI milestones &mdash; then we build it alongside you.</p>
+        <ul class="service-list">
+          <li><i class="fa-solid fa-check"></i> AI Readiness Assessment</li>
+          <li><i class="fa-solid fa-check"></i> Use Case Discovery &amp; Prioritisation</li>
+          <li><i class="fa-solid fa-check"></i> ROI Modelling &amp; Business Case</li>
+          <li><i class="fa-solid fa-check"></i> Data &amp; Architecture Strategy</li>
+          <li><i class="fa-solid fa-check"></i> Technology Partner Selection</li>
+        </ul>
+        <a href="#contact" class="service-link">Explore <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+      <div class="service-card reveal delay-3">
+        <div class="service-glow"></div>
+        <div class="service-icon-wrap" style="--c1:#0ea5e9;--c2:#10b981">
+          <i class="fa-solid fa-satellite-dish"></i>
+        </div>
+        <h3>Drone &amp; IoT Intelligence</h3>
+        <p>GPS drone operations, terrain mapping, multispectral crop analytics, and IoT sensor data pipelines feeding real-time AI models in the field.</p>
+        <ul class="service-list">
+          <li><i class="fa-solid fa-check"></i> RTK-GPS Drone Surveys</li>
+          <li><i class="fa-solid fa-check"></i> NDVI / Multispectral Analysis</li>
+          <li><i class="fa-solid fa-check"></i> IoT Data Pipelines</li>
+          <li><i class="fa-solid fa-check"></i> Geospatial ML Models</li>
+          <li><i class="fa-solid fa-check"></i> DGCA-Compliant Operations</li>
+        </ul>
+        <a href="#contact" class="service-link">Explore <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ INDUSTRIES ══════════════ -->
+<section id="industries" class="section industries-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Verticals</div>
+      <h2 class="section-h2">Industries We <span class="grad-text">Transform</span></h2>
+      <p class="section-desc">Deep domain expertise is what separates an AI solution from an AI product that actually works.</p>
+    </div>
+
+    <div class="industries-tabs">
+      <div class="ind-tab-buttons">
+        <button class="ind-btn active" data-tab="bfsi"><i class="fa-solid fa-landmark"></i> BFSI</button>
+        <button class="ind-btn" data-tab="healthcare"><i class="fa-solid fa-heart-pulse"></i> Healthcare</button>
+        <button class="ind-btn" data-tab="telecom"><i class="fa-solid fa-tower-broadcast"></i> Telecom</button>
+        <button class="ind-btn" data-tab="retail"><i class="fa-solid fa-bag-shopping"></i> Retail</button>
+        <button class="ind-btn" data-tab="public"><i class="fa-solid fa-building-columns"></i> Public Sector</button>
+      </div>
+
+      <div class="ind-panels">
+
+        <div class="ind-panel active" id="tab-bfsi">
+          <div class="ind-panel-content">
+            <div class="ind-text">
+              <h3>Banking, Financial Services &amp; Insurance</h3>
+              <p>From co-operative banks to NBFCs &mdash; we build AI that cuts NPA, catches fraud in milliseconds, automates compliance and gives your relationship managers a GenAI co-pilot for every client interaction.</p>
+              <div class="ind-use-cases">
+                <div class="uc-item"><i class="fa-solid fa-check-circle"></i><div><strong>AI Credit Scoring</strong><br/><span>50% faster loan approvals, 30% NPA reduction</span></div></div>
+                <div class="uc-item"><i class="fa-solid fa-check-circle"></i><div><strong>Real-Time Fraud Detection</strong><br/><span>Sub-100ms alert, 85%+ fraud recall rate</span></div></div>
+                <div class="uc-item"><i class="fa-solid fa-check-circle"></i><div><strong>AML &amp; Regulatory Automation</strong><br/><span>Auto SAR generation, RBI / SEBI compliance</span></div></div>
+                <div class="uc-item"><i class="fa-solid fa-check-circle"></i><div><strong>Hindi AI Banking Assistant</strong><br/><span>30% reduction in call centre volume</span></div></div>
+                <div class="uc-item"><i class="fa-solid fa-check-circle"></i><div><strong>Branch Performance BI</strong><br/><span>Daily automated reports for 200+ branches</span></div></div>
+                <div class="uc-item"><i class="fa-solid fa-check-circle"></i><div><strong>AI-Assisted KYC &amp; Document Processing</strong><br/><span>60% cost reduction in KYC operations</span></div></div>
+              </div>
+            </div>
+            <div class="ind-visual">
+              <div class="ind-stat-card"><span class="big-num">30%</span><span>NPA Reduction</span></div>
+              <div class="ind-stat-card"><span class="big-num">85%+</span><span>Fraud Recall</span></div>
+              <div class="ind-stat-card"><span class="big-num">3&times;</span><span>Faster Loan Processing</span></div>
+              <div class="ind-stat-card"><span class="big-num">60%</span><span>KYC Cost Reduction</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ind-panel" id="tab-healthcare">
+          <div class="ind-panel-content">
+            <div class="ind-text">
+              <h3>Healthcare &amp; Life Sciences</h3>
+              <p>AI-powered clinical decision support, intelligent patient journey orchestration, automated medical coding and real-time operational intelligence across hospitals and health networks.</p>
+              <div class="ind-use-cases">
+                <div class="uc-item"><i class="fa-solid fa-check-circle"></i><div><strong>Clinical Decision Support AI</strong><br/><span>Evidence-based recommendations at point of care</span></div></div>
+                <div class="uc-item"><i class="fa-solid fa-check-circle"></i><div><strong>Medical Imaging Analysis</strong><br/><span>CV models for radiology, pathology screening</span></div></div>
+                <div class="uc-item"><i class="fa-solid fa-check-circle"></i><div><strong>Patient Risk Stratification</strong><br/><span>Predict readmissions and deterioration risk</span></div></div>
+                <div class="uc-item"><i class="fa-solid fa-check-circle"></i><div><strong>Automated Medical Coding</strong><br/><span>ICD-10 / CPT auto-coding, claims automation</span></div></div>
+                <div class="uc-item"><i class="fa-solid fa-check-circle"></i><div><strong>Hospital Operations BI</strong><br/><span>OT utilisation, bed management, staff rostering</span></div></div>
+                <div class="uc-item"><i class="fa-solid fa-check-circle"></i><div><strong>Healthcare GenAI Copilot</strong><br/><span>Hindi + English clinical documentation assistant</span></div></div>
+              </div>
+            </div>
+            <div class="ind-visual">
+              <div class="ind-stat-card"><span class="big-num">45%</span><span>Faster Diagnosis</span></div>
+              <div class="ind-stat-card"><span class="big-num">2&times;</span><span>OT Utilisation</span></div>
+              <div class="ind-stat-card"><span class="big-num">60%</span><span>Faster Medical Coding</span></div>
+              <div class="ind-stat-card"><span class="big-num">HIPAA</span><span>Compliant Architecture</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ind-panel" id="tab-telecom">
+          <div class="ind-panel-content">
+            <div class="ind-text">
+              <h3>Telecom &amp; Communication Service Providers</h3>
+              <p>Predictive network maintenance, AI-driven churn prevention, intelligent customer experience platforms and real-time revenue assurance for operators at scale.</p>
+              <div class="ind-use-cases">
+                <div class="uc-item"><i class="fa-solid fa-check-circle"></i><div><strong>Predictive Network Maintenance</strong><br/><span>Predict outages 72 hrs before occurrence</span></div></div>
+                <div class="uc-item"><i class="fa-solid fa-check-circle"></i><div><strong>Customer Churn AI</strong><br/><span>25&ndash;40% churn prevention via early intervention</span></div></div>
+                <div class="uc-item"><i class="fa-solid fa-check-circle"></i><div><strong>Revenue Assurance &amp; Fraud</strong><br/><span>AI detection of bypass, SIM box, interconnect fraud</span></div></div>
+                <div class="uc-item"><i class="fa-solid fa-check-circle"></i><div><strong>AI Customer Support</strong><br/><span>Multilingual IVR + chatbot deflection</span></div></div>
+                <div class="uc-item"><i class="fa-solid fa-check-circle"></i><div><strong>Personalised Offer Engine</strong><br/><span>Next-best-offer recommendation at 1ms latency</span></div></div>
+                <div class="uc-item"><i class="fa-solid fa-check-circle"></i><div><strong>Network QoS BI</strong><br/><span>Real-time visibility across RAN, core, BSS</span></div></div>
+              </div>
+            </div>
+            <div class="ind-visual">
+              <div class="ind-stat-card"><span class="big-num">35%</span><span>Churn Prevention</span></div>
+              <div class="ind-stat-card"><span class="big-num">72h</span><span>Outage Prediction</span></div>
+              <div class="ind-stat-card"><span class="big-num">99.9%</span><span>Revenue Assurance</span></div>
+              <div class="ind-stat-card"><span class="big-num">40%</span><span>Support Cost Saved</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ind-panel" id="tab-retail">
+          <div class="ind-panel-content">
+            <div class="ind-text">
+              <h3>Retail &amp; Consumer Commerce</h3>
+              <p>Hyper-personalised shopping experiences, AI-optimised supply chains, dynamic pricing engines and GenAI product discovery that converts browsers into buyers.</p>
+              <div class="ind-use-cases">
+                <div class="uc-item"><i class="fa-solid fa-check-circle"></i><div><strong>Personalisation Engine</strong><br/><span>Real-time product &amp; content recommendations</span></div></div>
+                <div class="uc-item"><i class="fa-solid fa-check-circle"></i><div><strong>Demand Forecasting AI</strong><br/><span>SKU-level weekly forecast at 92%+ accuracy</span></div></div>
+                <div class="uc-item"><i class="fa-solid fa-check-circle"></i><div><strong>Dynamic Pricing</strong><br/><span>Competitor-aware AI pricing at 5-min intervals</span></div></div>
+                <div class="uc-item"><i class="fa-solid fa-check-circle"></i><div><strong>Visual Search &amp; GenAI Discovery</strong><br/><span>Image-to-product search, AI styling assistant</span></div></div>
+                <div class="uc-item"><i class="fa-solid fa-check-circle"></i><div><strong>Supply Chain Optimisation</strong><br/><span>End-to-end visibility, automated reorder points</span></div></div>
+                <div class="uc-item"><i class="fa-solid fa-check-circle"></i><div><strong>Returns &amp; Fraud Intelligence</strong><br/><span>AI detection of returns fraud, coupon abuse</span></div></div>
+              </div>
+            </div>
+            <div class="ind-visual">
+              <div class="ind-stat-card"><span class="big-num">28%</span><span>Conversion Uplift</span></div>
+              <div class="ind-stat-card"><span class="big-num">92%</span><span>Forecast Accuracy</span></div>
+              <div class="ind-stat-card"><span class="big-num">20%</span><span>Inventory Savings</span></div>
+              <div class="ind-stat-card"><span class="big-num">3&times;</span><span>Personalisation ROI</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ind-panel" id="tab-public">
+          <div class="ind-panel-content">
+            <div class="ind-text">
+              <h3>Public Sector &amp; Government</h3>
+              <p>Citizen-centric AI, intelligent grievance management, smart agriculture interventions, and data platforms that bring digital transformation to India&rsquo;s grassroots.</p>
+              <div class="ind-use-cases">
+                <div class="uc-item"><i class="fa-solid fa-check-circle"></i><div><strong>AI Grievance Management</strong><br/><span>Auto-classify, route and resolve citizen complaints</span></div></div>
+                <div class="uc-item"><i class="fa-solid fa-check-circle"></i><div><strong>Agriculture AI (Drone + ML)</strong><br/><span>Crop yield prediction, loan assessment, disaster recovery</span></div></div>
+                <div class="uc-item"><i class="fa-solid fa-check-circle"></i><div><strong>Scheme Eligibility Engine</strong><br/><span>AI-assisted beneficiary identification &amp; deduplication</span></div></div>
+                <div class="uc-item"><i class="fa-solid fa-check-circle"></i><div><strong>Smart City Analytics</strong><br/><span>Traffic, infrastructure, utilities intelligence layer</span></div></div>
+                <div class="uc-item"><i class="fa-solid fa-check-circle"></i><div><strong>Government BI Platforms</strong><br/><span>Real-time dashboards for departmental KPIs</span></div></div>
+                <div class="uc-item"><i class="fa-solid fa-check-circle"></i><div><strong>Multilingual AI Chatbots</strong><br/><span>Hindi / local language citizen service bots</span></div></div>
+              </div>
+            </div>
+            <div class="ind-visual">
+              <div class="ind-stat-card"><span class="big-num">70%</span><span>Faster Grievance Resolution</span></div>
+              <div class="ind-stat-card"><span class="big-num">&plusmn;2%</span><span>Crop Yield Accuracy</span></div>
+              <div class="ind-stat-card"><span class="big-num">NIC</span><span>Cloud Compatible</span></div>
+              <div class="ind-stat-card"><span class="big-num">MEITY</span><span>Compliance Ready</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ VALUE PROP ══════════════ -->
+<section id="value" class="section value-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Our Edge</div>
+      <h2 class="section-h2">Why <span class="grad-text">AIxBI</span> and Not a Big IT Firm?</h2>
+      <p class="section-desc">The right question &mdash; and the honest answer is about who actually works on your project.</p>
+    </div>
+
+    <div class="compare-table reveal">
+      <div class="compare-header">
+        <div class="comp-dim">Dimension</div>
+        <div class="comp-them">Large IT / Consulting Firm</div>
+        <div class="comp-us">AIxBI <span class="badge-us">Our Edge</span></div>
+      </div>
+      <div class="compare-row">
+        <div class="comp-dim"><i class="fa-solid fa-users"></i> Team on Ground</div>
+        <div class="comp-them"><i class="fa-solid fa-xmark neg"></i> Junior-heavy billing pyramid</div>
+        <div class="comp-us"><i class="fa-solid fa-check pos"></i> Senior practitioners only &mdash; no juniors</div>
+      </div>
+      <div class="compare-row">
+        <div class="comp-dim"><i class="fa-solid fa-star"></i> AI Depth</div>
+        <div class="comp-them"><i class="fa-solid fa-xmark neg"></i> Packaged tools &amp; SaaS wrappers</div>
+        <div class="comp-us"><i class="fa-solid fa-check pos"></i> Custom models, fine-tuned LLMs</div>
+      </div>
+      <div class="compare-row">
+        <div class="comp-dim"><i class="fa-solid fa-bolt"></i> Decision Speed</div>
+        <div class="comp-them"><i class="fa-solid fa-xmark neg"></i> Multi-layer PMO, slow escalation</div>
+        <div class="comp-us"><i class="fa-solid fa-check pos"></i> MD &amp; CTO directly accessible</div>
+      </div>
+      <div class="compare-row">
+        <div class="comp-dim"><i class="fa-solid fa-file-code"></i> IP Ownership</div>
+        <div class="comp-them"><i class="fa-solid fa-xmark neg"></i> Vendor lock-in, SaaS dependency</div>
+        <div class="comp-us"><i class="fa-solid fa-check pos"></i> 100% IP &amp; source code to you</div>
+      </div>
+      <div class="compare-row">
+        <div class="comp-dim"><i class="fa-solid fa-coins"></i> Cost Model</div>
+        <div class="comp-them"><i class="fa-solid fa-xmark neg"></i> High overhead billed to client</div>
+        <div class="comp-us"><i class="fa-solid fa-check pos"></i> Lean, value-based pricing</div>
+      </div>
+      <div class="compare-row">
+        <div class="comp-dim"><i class="fa-solid fa-scale-balanced"></i> Compliance</div>
+        <div class="comp-them"><i class="fa-solid fa-xmark neg"></i> Generic checkbox approach</div>
+        <div class="comp-us"><i class="fa-solid fa-check pos"></i> RBI, NABARD, MEITY, HIPAA aligned</div>
+      </div>
+    </div>
+
+    <div class="commitments reveal">
+      <h3>Our Commitments to Every Client</h3>
+      <div class="commit-grid">
+        <div class="commit-item"><i class="fa-solid fa-circle-check"></i><span>Dedicated team &mdash; zero staff rotation mid-project</span></div>
+        <div class="commit-item"><i class="fa-solid fa-circle-check"></i><span>Monthly steering committee with your leadership</span></div>
+        <div class="commit-item"><i class="fa-solid fa-circle-check"></i><span>Data stays on-premise or within India at all times</span></div>
+        <div class="commit-item"><i class="fa-solid fa-circle-check"></i><span>Explainable AI &mdash; no black boxes for critical decisions</span></div>
+        <div class="commit-item"><i class="fa-solid fa-circle-check"></i><span>Agile 2-week sprints with demo every sprint</span></div>
+        <div class="commit-item"><i class="fa-solid fa-circle-check"></i><span>3-year post-deployment support SLA included</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ TECH STACK ══════════════ -->
+<section id="tech" class="section tech-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Technology</div>
+      <h2 class="section-h2">Our <span class="grad-text">Tech Stack</span></h2>
+      <p class="section-desc">Open standards. Enterprise-grade. On-premise or cloud. Always production-ready.</p>
+    </div>
+
+    <div class="tech-grid reveal">
+      <div class="tech-category">
+        <div class="tech-cat-title" style="--tc:#0ea5e9"><i class="fa-solid fa-brain"></i> AI / ML</div>
+        <div class="tech-chips">
+          <span class="tchip">Python 3.11+</span><span class="tchip">PyTorch</span>
+          <span class="tchip">TensorFlow</span><span class="tchip">Hugging Face</span>
+          <span class="tchip">LangChain</span><span class="tchip">LlamaIndex</span>
+          <span class="tchip">scikit-learn</span><span class="tchip">XGBoost</span>
+          <span class="tchip">OpenCV</span><span class="tchip">Whisper ASR</span>
+        </div>
+      </div>
+      <div class="tech-category">
+        <div class="tech-cat-title" style="--tc:#6366f1"><i class="fa-solid fa-gears"></i> MLOps / DevOps</div>
+        <div class="tech-chips">
+          <span class="tchip">MLflow</span><span class="tchip">Apache Airflow</span>
+          <span class="tchip">Docker</span><span class="tchip">Kubernetes</span>
+          <span class="tchip">GitHub Actions</span><span class="tchip">Grafana</span>
+          <span class="tchip">Prometheus</span><span class="tchip">Terraform</span>
+        </div>
+      </div>
+      <div class="tech-category">
+        <div class="tech-cat-title" style="--tc:#10b981"><i class="fa-solid fa-code"></i> Full Stack</div>
+        <div class="tech-chips">
+          <span class="tchip">React / Next.js</span><span class="tchip">FastAPI</span>
+          <span class="tchip">Django</span><span class="tchip">Node.js</span>
+          <span class="tchip">React Native</span><span class="tchip">GraphQL</span>
+          <span class="tchip">gRPC</span><span class="tchip">TypeScript</span>
+        </div>
+      </div>
+      <div class="tech-category">
+        <div class="tech-cat-title" style="--tc:#f59e0b"><i class="fa-solid fa-database"></i> Data &amp; Cloud</div>
+        <div class="tech-chips">
+          <span class="tchip">PostgreSQL</span><span class="tchip">Apache Kafka</span>
+          <span class="tchip">Apache Spark</span><span class="tchip">dbt</span>
+          <span class="tchip">MinIO</span><span class="tchip">NIC MeghRaj</span>
+          <span class="tchip">Superset</span><span class="tchip">Metabase</span>
+          <span class="tchip">Elasticsearch</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="security-bar reveal">
+      <i class="fa-solid fa-lock"></i>
+      <span><strong>Security by Design:</strong> OWASP, AES-256 + TLS 1.3, RBAC, full audit logging &mdash; meeting RBI Cyber Security Framework, ISO 27001, MEITY and HIPAA requirements.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ PROCESS ══════════════ -->
+<section class="section process-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">How We Work</div>
+      <h2 class="section-h2">From Discovery to <span class="grad-text">Value in 90 Days</span></h2>
+    </div>
+
+    <div class="process-flow reveal">
+      <div class="proc-step">
+        <div class="proc-num">01</div>
+        <div class="proc-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+        <h4>Discovery</h4>
+        <p>Data audit, API mapping, pain point alignment and solution sign-off in Week 1&ndash;2.</p>
+      </div>
+      <div class="proc-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+      <div class="proc-step">
+        <div class="proc-num">02</div>
+        <div class="proc-icon"><i class="fa-solid fa-flask-vial"></i></div>
+        <h4>2-Week PoC</h4>
+        <p>Paid proof-of-concept on your real data. You see AI in action and measure outcomes before committing.</p>
+      </div>
+      <div class="proc-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+      <div class="proc-step">
+        <div class="proc-num">03</div>
+        <div class="proc-icon"><i class="fa-solid fa-hammer"></i></div>
+        <h4>Agile Build</h4>
+        <p>2-week sprints with live demos. Full transparency, no surprises. CI/CD from sprint one.</p>
+      </div>
+      <div class="proc-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+      <div class="proc-step">
+        <div class="proc-num">04</div>
+        <div class="proc-icon"><i class="fa-solid fa-rocket"></i></div>
+        <h4>Go Live</h4>
+        <p>Production deployment, staff training, hypercare support and value measurement dashboards.</p>
+      </div>
+      <div class="proc-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+      <div class="proc-step">
+        <div class="proc-num">05</div>
+        <div class="proc-icon"><i class="fa-solid fa-chart-line"></i></div>
+        <h4>Grow</h4>
+        <p>3-year SLA, model monitoring, continuous improvement and roadmap expansion.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ CONTACT ══════════════ -->
+<section id="contact" class="section contact-section">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-left reveal">
+        <div class="section-tag">Get In Touch</div>
+        <h2 class="section-h2">Ready to Build Something <span class="grad-text">Remarkable?</span></h2>
+        <p>Tell us your challenge. We&rsquo;ll respond in 24 hours with a concrete approach &mdash; not a generic pitch deck.</p>
+
+        <div class="contact-infos">
+          <div class="contact-info-item">
+            <div class="ci-icon"><i class="fa-solid fa-globe"></i></div>
+            <div><div class="ci-label">Website</div><a href="https://www.aixbi.net" class="ci-value">www.aixbi.net</a></div>
+          </div>
+          <div class="contact-info-item">
+            <div class="ci-icon"><i class="fa-solid fa-phone"></i></div>
+            <div><div class="ci-label">Phone</div><a href="tel:+919971315556" class="ci-value">+91-9971315556</a></div>
+          </div>
+          <div class="contact-info-item">
+            <div class="ci-icon"><i class="fa-solid fa-envelope"></i></div>
+            <div><div class="ci-label">Email</div><a href="mailto:info@aixbi.net" class="ci-value">info@aixbi.net</a></div>
+          </div>
+          <div class="contact-info-item">
+            <div class="ci-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <div><div class="ci-label">Office</div><span class="ci-value">H-148, GF, Sector-63, Noida &ndash; 201301, UP, India</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-right reveal delay-1">
+        <form class="contact-form" id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Your Name</label>
+              <input type="text" placeholder="Rahul Sharma" required autocomplete="name"/>
+            </div>
+            <div class="form-group">
+              <label>Company</label>
+              <input type="text" placeholder="Acme Corp" autocomplete="organization"/>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" placeholder="rahul@acme.com" required autocomplete="email"/>
+            </div>
+            <div class="form-group">
+              <label>Phone</label>
+              <input type="tel" placeholder="+91 98765 43210" autocomplete="tel"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Industry</label>
+            <select>
+              <option value="">Select your industry</option>
+              <option>BFSI</option>
+              <option>Healthcare</option>
+              <option>Telecom</option>
+              <option>Retail</option>
+              <option>Public Sector</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>What would you like to build?</label>
+            <textarea rows="4" placeholder="Describe your challenge or the AI solution you're thinking about..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary full-width">
+            <i class="fa-solid fa-paper-plane"></i> Send Message
+          </button>
+          <div class="form-note">We respond within 24 hours. No spam, ever.</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <svg class="logo-svg footer-logo" viewBox="0 0 170 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <text x="0" y="36" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="38" fill="url(#fGrad1)">AI</text>
+          <text x="58" y="34" font-family="Space Grotesk, sans-serif" font-weight="300" font-size="28" fill="#475569">&#x00D7;</text>
+          <text x="80" y="36" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="38" fill="url(#fGrad2)">BI</text>
+          <circle cx="152" cy="8" r="4" fill="#6366f1" opacity="0.7"/>
+          <circle cx="161" cy="18" r="2.5" fill="#0ea5e9" opacity="0.5"/>
+          <line x1="152" y1="11" x2="160" y2="17" stroke="#6366f1" stroke-width="1.2" opacity="0.4"/>
+          <defs>
+            <linearGradient id="fGrad1" x1="0" y1="0" x2="60" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#0ea5e9"/><stop offset="100%" stop-color="#6366f1"/>
+            </linearGradient>
+            <linearGradient id="fGrad2" x1="80" y1="0" x2="130" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#8b5cf6"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <p class="footer-tagline">AI &times; Business Intelligence<br/>Value-First Technology Company</p>
+        <p class="footer-addr">H-148, GF, Sector-63<br/>Noida &ndash; 201301, UP, India</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">AI / ML &amp; GenAI</a></li>
+          <li><a href="#services">Business Intelligence</a></li>
+          <li><a href="#services">Full-Stack Development</a></li>
+          <li><a href="#services">MLOps &amp; DevSecOps</a></li>
+          <li><a href="#services">AI Strategy &amp; Consulting</a></li>
+          <li><a href="#services">Drone &amp; IoT Intelligence</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Industries</h4>
+        <ul>
+          <li><a href="#industries">BFSI</a></li>
+          <li><a href="#industries">Healthcare</a></li>
+          <li><a href="#industries">Telecom</a></li>
+          <li><a href="#industries">Retail</a></li>
+          <li><a href="#industries">Public Sector</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#about">About AIxBI</a></li>
+          <li><a href="#value">Why Us</a></li>
+          <li><a href="#tech">Tech Stack</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="mailto:info@aixbi.net">info@aixbi.net</a></li>
+          <li><a href="tel:+919971315556">+91-9971315556</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 AIxBI Pvt. Ltd. All rights reserved. &middot; Noida, India</p>
+      <p class="footer-legal">All product names, logos, and trademarks are property of their respective owners. This website does not constitute a warranty or representation.</p>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+
+<script src="scripts.js"></script>
 </body>
 </html>
