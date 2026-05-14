@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AIxBI × HPSCB — AI & IT Transformation Pitch</title>
+<style>
+  /* ─── Reset & Base ─────────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: #f4f6fb;
+    color: #1a1f36;
+    overflow-x: hidden;
+  }
+
+  /* ─── Design Tokens ─────────────────────────────────────────────────── */
+  :root {
+    --accent:   #0077cc;
+    --accent2:  #6d28d9;
+    --accent3:  #059669;
+    --warn:     #d97706;
+    --card-bg:  rgba(255,255,255,0.85);
+    --border:   rgba(0,119,204,0.22);
+    --grad1: linear-gradient(135deg, #e8f0fe 0%, #ede9fe 100%);
+    --grad2: linear-gradient(135deg, #e8f5f0 0%, #d1fae5 100%);
+    --grad3: linear-gradient(135deg, #ede9fe 0%, #dbeafe 100%);
+  }
+
+  /* ─── Navigation Dots ───────────────────────────────────────────────── */
+  #nav-dots {
+    position: fixed; right: 20px; top: 50%; transform: translateY(-50%);
+    z-index: 1000; display: flex; flex-direction: column; gap: 10px;
+  }
+  .dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: rgba(0,0,0,0.18); border: 2px solid rgba(0,0,0,0.25);
+    cursor: pointer; transition: all .3s;
+  }
+  .dot:hover, .dot.active { background: var(--accent); border-color: var(--accent); }
+
+  /* ─── Slides ────────────────────────────────────────────────────────── */
+  .slide {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    padding: 60px 40px; position: relative; overflow: hidden;
+  }
+  .slide-inner { max-width: 1100px; width: 100%; z-index: 2; }
+
+  /* ─── Slide Backgrounds ─────────────────────────────────────────────── */
+  .s1  { background: var(--grad1); }
+  .s2  { background: linear-gradient(135deg,#f0f4ff 0%,#ede9fe 100%); }
+  .s3  { background: linear-gradient(135deg,#f0f7ff 0%,#dbeafe 100%); }
+  .s4  { background: linear-gradient(135deg,#f4f0ff 0%,#ede9fe 100%); }
+  .s5  { background: linear-gradient(135deg,#f0f7ff 0%,#dbeafe 100%); }
+  .s6  { background: var(--grad2); }
+  .s7  { background: linear-gradient(135deg,#f0f4ff 0%,#ede9fe 100%); }
+  .s8  { background: linear-gradient(135deg,#f0f7ff 0%,#dbeafe 100%); }
+  .s9  { background: var(--grad3); }
+  .s10 { background: linear-gradient(135deg,#f4f0ff 0%,#ede9fe 100%); }
+  .s11 { background: var(--grad2); }
+  .s12 { background: var(--grad1); }
+
+  /* ─── Decorative blobs ──────────────────────────────────────────────── */
+  .blob {
+    position: absolute; border-radius: 50%; opacity: .12; filter: blur(80px); pointer-events: none;
+  }
+  .blob-blue  { background: #00d4ff; }
+  .blob-purple{ background: #7c3aed; }
+  .blob-green { background: #10b981; }
+
+  /* ─── Typography ────────────────────────────────────────────────────── */
+  .slide-tag {
+    font-size: .75rem; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--accent); font-weight: 600; margin-bottom: 14px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .slide-tag::before { content:''; display:block; width:32px; height:2px; background:var(--accent); }
+
+  h1 { font-size: clamp(2rem, 5vw, 3.6rem); font-weight: 800; line-height: 1.1; }
+  h2 { font-size: clamp(1.6rem, 3.5vw, 2.6rem); font-weight: 700; line-height: 1.2; }
+  h3 { font-size: 1.15rem; font-weight: 600; }
+  p  { line-height: 1.75; color: #4a5568; }
+
+  .gradient-text {
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .accent-text  { color: var(--accent); }
+  .accent2-text { color: var(--accent2); }
+  .green-text   { color: var(--accent3); }
+  .warn-text    { color: var(--warn); }
+
+  /* ─── Cards ─────────────────────────────────────────────────────────── */
+  .card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 16px; padding: 28px 24px;
+    backdrop-filter: blur(10px);
+    transition: transform .3s, box-shadow .3s;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,212,255,.1); }
+
+  .card-icon { font-size: 2rem; margin-bottom: 14px; }
+
+  /* ─── Grid Layouts ──────────────────────────────────────────────────── */
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; }
+
+  /* ─── Stats Banner ──────────────────────────────────────────────────── */
+  .stat-row { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-around; margin: 32px 0; }
+  .stat-box {
+    text-align: center; background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px 24px; flex: 1; min-width: 130px;
+  }
+  .stat-num { font-size: 2.2rem; font-weight: 800; color: var(--accent); }
+  .stat-lbl { font-size: .78rem; color: #6b7280; margin-top: 4px; text-transform: uppercase; letter-spacing: .1em; }
+
+  /* ─── Timeline ───────────────────────────────────────────────────────── */
+  .timeline { position: relative; padding-left: 30px; }
+  .timeline::before {
+    content:''; position: absolute; left: 6px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(180deg, var(--accent), var(--accent2));
+  }
+  .tl-item { position: relative; margin-bottom: 28px; }
+  .tl-item::before {
+    content:''; position: absolute; left: -28px; top: 6px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--accent); border: 2px solid #f4f6fb;
+  }
+  .tl-title { font-weight: 700; color: var(--accent); margin-bottom: 4px; }
+  .tl-desc  { font-size: .9rem; color: #4a5568; }
+
+  /* ─── Table ──────────────────────────────────────────────────────────── */
+  table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+  th { background: rgba(0,119,204,.10); color: var(--accent); font-size: .82rem;
+       text-transform: uppercase; letter-spacing: .1em; padding: 12px 16px; text-align: left; }
+  td { padding: 14px 16px; border-bottom: 1px solid rgba(0,0,0,.07); font-size: .9rem; color: #374151; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(0,119,204,.04); }
+
+  /* ─── Badge / Tag ────────────────────────────────────────────────────── */
+  .badge {
+    display: inline-block; padding: 4px 12px; border-radius: 999px;
+    font-size: .72rem; font-weight: 600; letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+  .badge-blue   { background: rgba(0,212,255,.15);  color: var(--accent); }
+  .badge-purple { background: rgba(124,58,237,.2);  color: #a78bfa; }
+  .badge-green  { background: rgba(16,185,129,.18); color: var(--accent3); }
+  .badge-warn   { background: rgba(245,158,11,.18); color: var(--warn); }
+
+  /* ─── Divider ────────────────────────────────────────────────────────── */
+  .divider { height: 1px; background: var(--border); margin: 28px 0; }
+
+  /* ─── CTA Button ─────────────────────────────────────────────────────── */
+  .btn {
+    display: inline-block; padding: 14px 36px; border-radius: 8px;
+    font-weight: 700; font-size: 1rem; text-decoration: none; cursor: pointer;
+    transition: all .3s; border: none;
+  }
+  .btn-primary {
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    color: #ffffff;
+  }
+  .btn-primary:hover { opacity: .88; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,212,255,.3); }
+  .btn-outline {
+    background: transparent; color: var(--accent);
+    border: 2px solid var(--accent);
+  }
+  .btn-outline:hover { background: var(--accent); color: #ffffff; }
+
+  /* ─── Risk / ROI table colors ──────────────────────────────────────── */
+  .green-cell { color: var(--accent3); font-weight: 600; }
+  .warn-cell  { color: var(--warn); font-weight: 600; }
+
+  /* ─── Progress bar ───────────────────────────────────────────────────── */
+  .prog-bar-bg { background: rgba(0,0,0,.08); border-radius: 999px; height: 8px; margin: 6px 0 16px; }
+  .prog-bar    { height: 8px; border-radius: 999px; background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+
+  /* ─── Logo lockup ────────────────────────────────────────────────────── */
+  .logo-lockup {
+    display: flex; align-items: center; gap: 18px;
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 14px; padding: 16px 24px; margin-bottom: 40px;
+  }
+  .logo-box {
+    width: 56px; height: 56px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 1.1rem; flex-shrink: 0;
+  }
+  .logo-aixbi  { background: linear-gradient(135deg,#00d4ff,#7c3aed); color:#fff; }
+  .logo-hpscb  { background: linear-gradient(135deg,#1e3a8a,#3b82f6); color:#fff; font-size:.8rem; text-align:center; line-height:1.1; }
+  .logo-sep    { font-size: 1.6rem; color: var(--border); }
+
+  /* ─── Slide counter ──────────────────────────────────────────────────── */
+  .slide-num {
+    position: absolute; bottom: 24px; right: 36px;
+    font-size: .72rem; color: rgba(0,0,0,.3); letter-spacing: .12em;
+    z-index: 10;
+  }
+
+  /* ─── Print / Presentation ───────────────────────────────────────────── */
+  @media print {
+    .slide { page-break-after: always; min-height: 100vh; }
+    #nav-dots, .slide-num { display: none; }
+  }
+
+  /* ─── Responsive ────────────────────────────────────────────────────── */
+  @media(max-width:640px){
+    .slide { padding: 40px 20px; }
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── Nav Dots ──────────────────────────────────────────────────────────── -->
+<nav id="nav-dots" aria-label="Slide navigation">
+  <div class="dot" onclick="goto(0)" title="Cover"></div>
+  <div class="dot" onclick="goto(1)" title="About AIxBI"></div>
+  <div class="dot" onclick="goto(2)" title="Understanding HPSCB"></div>
+  <div class="dot" onclick="goto(3)" title="Pain Points"></div>
+  <div class="dot" onclick="goto(4)" title="AI Opportunity"></div>
+  <div class="dot" onclick="goto(5)" title="Solutions Portfolio"></div>
+  <div class="dot" onclick="goto(6)" title="Use Cases"></div>
+  <div class="dot" onclick="goto(7)" title="Drone Agri Assessment"></div>
+  <div class="dot" onclick="goto(8)" title="Tech Stack"></div>
+  <div class="dot" onclick="goto(9)" title="Roadmap"></div>
+  <div class="dot" onclick="goto(10)" title="ROI"></div>
+  <div class="dot" onclick="goto(11)" title="Why AIxBI"></div>
+  <div class="dot" onclick="goto(12)" title="Call to Action"></div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     SLIDE 1 — COVER
+══════════════════════════════════════════════════════════════════════════ -->
+<section class="slide s1" id="s0">
+  <div class="blob blob-blue"  style="width:500px;height:500px;top:-100px;left:-150px;"></div>
+  <div class="blob blob-purple"style="width:400px;height:400px;bottom:-80px;right:-100px;"></div>
+
+  <div class="slide-inner" style="text-align:center;">
+
+    <div class="logo-lockup" style="justify-content:center; max-width:480px; margin:0 auto 48px;">
+      <div class="logo-box logo-aixbi">AI<br/>xBI</div>
+      <div class="logo-sep">×</div>
+      <div class="logo-box logo-hpscb">HP<br/>SCB</div>
+      <div style="text-align:left;">
+        <div style="font-weight:700; font-size:1rem;">Partnership Proposal</div>
+        <div style="font-size:.78rem; color:#4a5568;">May 2026 · Confidential</div>
+      </div>
+    </div>
+
+    <h1 style="margin-bottom:16px;">
+      Transforming <span class="gradient-text">Co-operative Banking</span><br/>
+      with AI &amp; Intelligent Technology
+    </h1>
+
+    <p style="max-width:620px;margin:0 auto 40px; font-size:1.1rem;">
+      A strategic IT, AI/ML and Digital Innovation roadmap proposed by
+      <strong style="color:#1a1f36;">AIxBI</strong> for
+      <strong style="color:#1a1f36;">Himachal Pradesh State Co-operative Bank Ltd.</strong>
+    </p>
+
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <span class="badge badge-blue">AI · ML · MLOps</span>
+      <span class="badge badge-purple">DevOps · Cloud</span>
+      <span class="badge badge-green">FinTech Innovation</span>
+      <span class="badge badge-warn">Data Analytics</span>
+    </div>
+
+    <p style="margin-top:48px; font-size:.82rem; color:rgba(255,255,255,.3);">
+      Presented by AIxBI &nbsp;·&nbsp; Noida, India &nbsp;·&nbsp; www.aixbi.net &nbsp;·&nbsp; +91-9971315556
+    </p>
+  </div>
+  <div class="slide-num">1 / 12</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     SLIDE 2 — ABOUT AIxBI
+══════════════════════════════════════════════════════════════════════════ -->
+<section class="slide s2" id="s1">
+  <div class="blob blob-purple" style="width:350px;height:350px;top:-60px;right:-80px;"></div>
+
+  <div class="slide-inner">
+    <div class="slide-tag">Who We Are</div>
+    <h2 style="margin-bottom:8px;">About <span class="gradient-text">AIxBI</span></h2>
+    <p style="margin-bottom:36px; max-width:700px;">
+      AIxBI is a boutique AI-first technology company headquartered in <strong style="color:#1a1f36;">Noida, India</strong>,
+      delivering enterprise-grade AI, ML, and data engineering solutions to regulated industries
+      including BFSI, healthcare, and government.
+    </p>
+
+    <div class="stat-row">
+      <div class="stat-box">
+        <div class="stat-num">10–20</div>
+        <div class="stat-lbl">Expert Team</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">15+</div>
+        <div class="stat-lbl">Avg. Years Experience</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">100%</div>
+        <div class="stat-lbl">AI-Native Focus</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">BFSI</div>
+        <div class="stat-lbl">Domain Expertise</div>
+      </div>
+    </div>
+
+    <div class="grid-3" style="margin-top:28px;">
+      <div class="card">
+        <div class="card-icon">🧠</div>
+        <h3 style="color:var(--accent); margin-bottom:8px;">AI / ML / GenAI</h3>
+        <p style="font-size:.88rem;">Predictive models, LLM-powered assistants, NLP,
+        Computer Vision, recommendation engines.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⚙️</div>
+        <h3 style="color:var(--accent2); margin-bottom:8px;">MLOps & DevOps</h3>
+        <p style="font-size:.88rem;">CI/CD pipelines, model registry, monitoring,
+        containerisation (Docker/K8s), automated deployments.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🖥️</div>
+        <h3 style="color:var(--accent3); margin-bottom:8px;">Full-Stack Apps</h3>
+        <p style="font-size:.88rem;">Web portals, mobile apps, REST/GraphQL APIs,
+        microservices, cloud-native architecture.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <p style="font-size:.88rem; color:#4a5568;">
+      <span class="accent-text font-bold">Our edge:</span>
+      Small enough to be agile, senior enough to deliver production-grade AI systems from Day 1 —
+      no junior fat, no billing bloat.
+    </p>
+  </div>
+  <div class="slide-num">2 / 12</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     SLIDE 3 — UNDERSTANDING HPSCB
+══════════════════════════════════════════════════════════════════════════ -->
+<section class="slide s3" id="s2">
+  <div class="blob blob-blue" style="width:400px;height:400px;bottom:-100px;left:-100px;"></div>
+
+  <div class="slide-inner">
+    <div class="slide-tag">Know Your Customer</div>
+    <h2 style="margin-bottom:8px;">Understanding <span class="accent-text">HPSCB</span></h2>
+    <p style="margin-bottom:32px;max-width:740px;">
+      The Himachal Pradesh State Co-operative Bank Ltd. is a 72-year-old apex co-operative bank
+      serving the people of Himachal Pradesh — predominantly rural and semi-urban communities
+      dependent on agriculture and SME lending.
+    </p>
+
+    <div class="stat-row">
+      <div class="stat-box"><div class="stat-num">16L+</div><div class="stat-lbl">Customers</div></div>
+      <div class="stat-box"><div class="stat-num">262</div><div class="stat-lbl">Branches / ECs on CBS</div></div>
+      <div class="stat-box"><div class="stat-num">1,700+</div><div class="stat-lbl">Employees</div></div>
+      <div class="stat-box"><div class="stat-num">94%</div><div class="stat-lbl">Rural Branches</div></div>
+      <div class="stat-box"><div class="stat-num">72 yrs</div><div class="stat-lbl">In Business</div></div>
+    </div>
+
+    <div class="grid-2" style="margin-top:28px;">
+      <div class="card">
+        <h3 style="color:var(--accent); margin-bottom:12px;">Current Digital Assets</h3>
+        <ul style="list-style:none; color:#4a5568; font-size:.9rem; line-height:2;">
+          <li>✅ Internet Banking Portal (onlinebanking.hpscb.com)</li>
+          <li>✅ Himpesa Mobile Banking App (iOS + Android)</li>
+          <li>✅ Core Banking System (CBS) across all branches</li>
+          <li>✅ EMI / RD / FD Calculators</li>
+          <li>✅ ACSTI Training Institute</li>
+          <li>✅ IBPS-based recruitment portal</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--warn); margin-bottom:12px;">Observed Gaps</h3>
+        <ul style="list-style:none; color:#4a5568; font-size:.9rem; line-height:2;">
+          <li>⚠️ No AI-powered risk or credit scoring</li>
+          <li>⚠️ No personalised product recommendations</li>
+          <li>⚠️ No intelligent fraud detection layer</li>
+          <li>⚠️ Limited data analytics / BI dashboards</li>
+          <li>⚠️ Manual KYC updation processes</li>
+          <li>⚠️ No conversational AI / chatbot support</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">3 / 12</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     SLIDE 4 — PAIN POINTS
+══════════════════════════════════════════════════════════════════════════ -->
+<section class="slide s4" id="s3">
+  <div class="blob blob-purple" style="width:360px;height:360px;top:-60px;right:-60px;"></div>
+
+  <div class="slide-inner">
+    <div class="slide-tag">The Problem</div>
+    <h2 style="margin-bottom:8px;">Pain Points We <span class="gradient-text">Solve for HPSCB</span></h2>
+    <p style="margin-bottom:36px; max-width:720px;">
+      Regional co-operative banks face unique pressures — limited tech budgets, legacy core systems,
+      rural connectivity constraints, and rising regulatory demands. AI can address all of these.
+    </p>
+
+    <div class="grid-2">
+      <div class="card" style="border-left: 3px solid var(--warn);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+          <span style="font-size:1.6rem;">📋</span>
+          <h3 class="warn-text">Loan Default &amp; Credit Risk</h3>
+        </div>
+        <p style="font-size:.88rem;">Agricultural and SME loans carry high seasonal default risk.
+        Manual credit appraisal misses early warning signals hidden in transaction data.</p>
+      </div>
+
+      <div class="card" style="border-left: 3px solid #ef4444;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+          <span style="font-size:1.6rem;">🚨</span>
+          <h3 style="color:#f87171;">Fraud &amp; Cybersecurity</h3>
+        </div>
+        <p style="font-size:.88rem;">Digital transactions via Himpesa and Net Banking expose the bank
+        to real-time fraud. Rule-based systems lag behind evolving attack vectors.</p>
+      </div>
+
+      <div class="card" style="border-left: 3px solid var(--accent);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+          <span style="font-size:1.6rem;">👥</span>
+          <h3 class="accent-text">Customer Retention &amp; Engagement</h3>
+        </div>
+        <p style="font-size:.88rem;">With 16 lakh customers, HPSCB lacks personalised
+        communication and next-product recommendations, losing share to private banks.</p>
+      </div>
+
+      <div class="card" style="border-left: 3px solid var(--accent3);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+          <span style="font-size:1.6rem;">📊</span>
+          <h3 class="green-text">Operational Inefficiency</h3>
+        </div>
+        <p style="font-size:.88rem;">Manual KYC, paper-heavy branch operations, and
+        absence of predictive analytics drive up cost-to-income ratio.</p>
+      </div>
+
+      <div class="card" style="border-left: 3px solid var(--accent2);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+          <span style="font-size:1.6rem;">🏦</span>
+          <h3 style="color:#a78bfa;">Regulatory Compliance</h3>
+        </div>
+        <p style="font-size:.88rem;">RBI and NABARD mandates on AML, KYC, and audit trails require
+        real-time and automated reporting capabilities beyond current infrastructure.</p>
+      </div>
+
+      <div class="card" style="border-left: 3px solid #f472b6;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+          <span style="font-size:1.6rem;">🌐</span>
+          <h3 style="color:#f9a8d4;">Rural Digital Inclusion</h3>
+        </div>
+        <p style="font-size:.88rem;">94% rural branches need vernacular AI assistants,
+        voice-enabled interfaces and offline-capable apps to serve the last-mile customer.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">4 / 12</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     SLIDE 5 — THE AI OPPORTUNITY
+══════════════════════════════════════════════════════════════════════════ -->
+<section class="slide s5" id="s4">
+  <div class="blob blob-blue" style="width:450px;height:450px;bottom:-120px;right:-80px;"></div>
+
+  <div class="slide-inner">
+    <div class="slide-tag">Market Context</div>
+    <h2 style="margin-bottom:8px;">The <span class="gradient-text">AI Opportunity</span> in Indian Co-operative Banking</h2>
+    <p style="margin-bottom:36px; max-width:740px;">
+      India's co-operative banking sector serves 300 million+ people. AI adoption in this segment
+      is nascent — making it the highest-ROI window for early movers like HPSCB.
+    </p>
+
+    <div class="grid-3" style="margin-bottom: 36px;">
+      <div class="card" style="text-align:center;">
+        <div style="font-size:2.4rem; font-weight:800; color:var(--accent);">₹1.2T</div>
+        <div style="font-size:.82rem; color:#4a5568; margin-top:6px;">Indian Co-op Bank Assets under management</div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div style="font-size:2.4rem; font-weight:800; color:var(--accent2);">40%</div>
+        <div style="font-size:.82rem; color:#4a5568; margin-top:6px;">Cost reduction achievable via AI-driven automation</div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div style="font-size:2.4rem; font-weight:800; color:var(--accent3);">3×</div>
+        <div style="font-size:.82rem; color:#4a5568; margin-top:6px;">Faster loan processing with AI credit scoring</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="color:var(--accent); margin-bottom:16px;">Why NOW is the right time for HPSCB</h3>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px;">
+        <div>
+          <div style="font-weight:600; color:#1a1f36; margin-bottom:4px;">📌 RBI Digital Push</div>
+          <p style="font-size:.82rem;">RBI's guidelines on digital lending,
+          cloud adoption, and cybersecurity are driving mandatory modernisation.</p>
+        </div>
+        <div>
+          <div style="font-weight:600; color:#1a1f36; margin-bottom:4px;">📌 UPI &amp; CBDC Readiness</div>
+          <p style="font-size:.82rem;">Next-gen payment infra requires AI-backed
+          fraud detection and intelligent routing.</p>
+        </div>
+        <div>
+          <div style="font-weight:600; color:#1a1f36; margin-bottom:4px;">📌 Competitive Pressure</div>
+          <p style="font-size:.82rem;">Fintech lenders are targeting HPSCB's
+          rural customer base with AI-first credit products.</p>
+        </div>
+        <div>
+          <div style="font-weight:600; color:#1a1f36; margin-bottom:4px;">📌 Data Goldmine</div>
+          <p style="font-size:.82rem;">72 years of transaction data across 16L+ customers
+          is an untapped AI training asset.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">5 / 12</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     SLIDE 6 — SOLUTIONS PORTFOLIO
+══════════════════════════════════════════════════════════════════════════ -->
+<section class="slide s6" id="s5">
+  <div class="blob blob-green" style="width:400px;height:400px;top:-80px;left:-100px;"></div>
+
+  <div class="slide-inner">
+    <div class="slide-tag">Our Offerings</div>
+    <h2 style="margin-bottom:8px;">AIxBI <span class="gradient-text">Solutions Portfolio</span> for HPSCB</h2>
+    <p style="margin-bottom:32px; max-width:700px;">Six high-impact solution pillars, each
+    independently deployable and collectively transformative.</p>
+
+    <div class="grid-2">
+
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+          <div style="width:40px;height:40px;border-radius:8px;background:linear-gradient(135deg,#00d4ff,#0ea5e9);
+                      display:flex;align-items:center;justify-content:center;font-size:1.2rem;">🤖</div>
+          <div>
+            <h3 class="accent-text">AI Credit Scoring Engine</h3>
+            <span class="badge badge-blue">Core Product</span>
+          </div>
+        </div>
+        <p style="font-size:.87rem; margin-bottom:12px;">ML-powered alternative credit scoring
+        combining CBS transaction data, repayment history, seasonal patterns, and geographic risk.
+        Reduces NPA by flagging at-risk borrowers 90 days in advance.</p>
+        <div style="font-size:.8rem; color:var(--accent3);">↗ Reduce NPA · ↗ Faster Approvals · ↗ NABARD Compliance</div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+          <div style="width:40px;height:40px;border-radius:8px;background:linear-gradient(135deg,#ef4444,#f97316);
+                      display:flex;align-items:center;justify-content:center;font-size:1.2rem;">🛡️</div>
+          <div>
+            <h3 style="color:#f87171;">Real-Time Fraud Detection</h3>
+            <span class="badge badge-warn">Critical Priority</span>
+          </div>
+        </div>
+        <p style="font-size:.87rem; margin-bottom:12px;">Deep learning anomaly detection on
+        Himpesa and Net Banking transactions. Graph neural networks detect mule account networks.
+        Sub-100ms alert generation integrated into CBS.</p>
+        <div style="font-size:.8rem; color:var(--accent3);">↗ Stop Fraud in Real-Time · ↗ Protect Customer Trust</div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+          <div style="width:40px;height:40px;border-radius:8px;background:linear-gradient(135deg,#7c3aed,#a78bfa);
+                      display:flex;align-items:center;justify-content:center;font-size:1.2rem;">💬</div>
+          <div>
+            <h3 style="color:#a78bfa;">Multilingual AI Assistant (Hindi / Pahadi)</h3>
+            <span class="badge badge-purple">Rural Impact</span>
+          </div>
+        </div>
+        <p style="font-size:.87rem; margin-bottom:12px;">LLM-powered conversational assistant
+        embedded in Himpesa App. Supports balance inquiries, loan status, KYC update prompts,
+        and financial literacy in Hindi and local dialects.</p>
+        <div style="font-size:.8rem; color:var(--accent3);">↗ Customer Engagement · ↗ Reduce Call Centre Load</div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+          <div style="width:40px;height:40px;border-radius:8px;background:linear-gradient(135deg,#10b981,#06b6d4);
+                      display:flex;align-items:center;justify-content:center;font-size:1.2rem;">📊</div>
+          <div>
+            <h3 class="green-text">Intelligent BI &amp; Analytics Platform</h3>
+            <span class="badge badge-green">Decision Support</span>
+          </div>
+        </div>
+        <p style="font-size:.87rem; margin-bottom:12px;">Real-time executive dashboards on
+        deposits, loan book, NPAs, branch performance, and liquidity ratios.
+        Predictive analytics for deposit growth and seasonal credit demand planning.</p>
+        <div style="font-size:.8rem; color:var(--accent3);">↗ Data-Driven Decisions · ↗ Board Reporting Automation</div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+          <div style="width:40px;height:40px;border-radius:8px;background:linear-gradient(135deg,#f59e0b,#fde68a);
+                      display:flex;align-items:center;justify-content:center;font-size:1.2rem;">🪪</div>
+          <div>
+            <h3 class="warn-text">AI-Assisted KYC &amp; AML</h3>
+            <span class="badge badge-warn">Compliance</span>
+          </div>
+        </div>
+        <p style="font-size:.87rem; margin-bottom:12px;">Document OCR + face-match AI for
+        digital KYC onboarding. AML transaction monitoring with rule + ML hybrid engine.
+        Automated SAR generation for RBI reporting.</p>
+        <div style="font-size:.8rem; color:var(--accent3);">↗ RBI Compliance · ↗ Cut KYC Cost by 60%</div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+          <div style="width:40px;height:40px;border-radius:8px;background:linear-gradient(135deg,#3b82f6,#6366f1);
+                      display:flex;align-items:center;justify-content:center;font-size:1.2rem;">☁️</div>
+          <div>
+            <h3 style="color:#93c5fd;">DevOps &amp; MLOps Infrastructure</h3>
+            <span class="badge badge-blue">Foundation</span>
+          </div>
+        </div>
+        <p style="font-size:.87rem; margin-bottom:12px;">Secure on-premise / hybrid cloud
+        infrastructure with CI/CD, model versioning, A/B testing, and automated monitoring.
+        Compliant with RBI cloud guidelines and MEITY standards.</p>
+        <div style="font-size:.8rem; color:var(--accent3);">↗ Faster Releases · ↗ Zero Downtime · ↗ Cost Optimisation</div>
+      </div>
+
+    </div>
+  </div>
+  <div class="slide-num">6 / 12</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     SLIDE 7 — USE CASES DEEP DIVE
+══════════════════════════════════════════════════════════════════════════ -->
+<section class="slide s7" id="s6">
+  <div class="blob blob-purple" style="width:380px;height:380px;bottom:-80px;right:-80px;"></div>
+
+  <div class="slide-inner">
+    <div class="slide-tag">Use Cases</div>
+    <h2 style="margin-bottom:8px;">High-Fidelity <span class="gradient-text">Use Cases</span> for HPSCB</h2>
+    <p style="margin-bottom:28px; max-width:720px;">
+      Concrete scenarios mapped to HPSCB's existing product lines and customer segments.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Use Case</th>
+          <th>HPSCB Product/Segment</th>
+          <th>AI / ML Technique</th>
+          <th>Expected Impact</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>🌾 Agri-Loan Credit Scoring</td>
+          <td>Agricultural Loan</td>
+          <td>XGBoost + Satellite Data Fusion</td>
+          <td class="green-cell">↓ NPA by 25–35%</td>
+        </tr>
+        <tr>
+          <td>🏠 Home Loan Risk Predictor</td>
+          <td>Home Loan</td>
+          <td>Gradient Boosted Trees + Bureau Data</td>
+          <td class="green-cell">3× faster approval</td>
+        </tr>
+        <tr>
+          <td>💳 Transaction Fraud Alert</td>
+          <td>Himpesa / Net Banking</td>
+          <td>LSTM Anomaly Detection</td>
+          <td class="green-cell">85%+ fraud recall</td>
+        </tr>
+        <tr>
+          <td>🗣️ Hindi Voice Banking Bot</td>
+          <td>Himpesa Mobile App</td>
+          <td>Fine-tuned LLM + Whisper ASR</td>
+          <td class="green-cell">30% support deflection</td>
+        </tr>
+        <tr>
+          <td>📑 Automated KYC Renewal</td>
+          <td>Savings / Current Accounts</td>
+          <td>OCR + Face Recognition</td>
+          <td class="green-cell">60% cost reduction</td>
+        </tr>
+        <tr>
+          <td>📈 Branch Performance BI</td>
+          <td>All 262 Branches</td>
+          <td>Real-time ETL + Power BI / Metabase</td>
+          <td class="green-cell">Daily automated reports</td>
+        </tr>
+        <tr>
+          <td>🔎 AML Transaction Monitoring</td>
+          <td>All Digital Channels</td>
+          <td>Graph ML + Rule Engine</td>
+          <td class="green-cell">RBI SAR Compliance</td>
+        </tr>
+        <tr>
+          <td>📲 Personalised Product Push</td>
+          <td>Term Deposits / RD</td>
+          <td>Collaborative Filtering</td>
+          <td class="green-cell">↑ Cross-sell by 20%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="slide-num">7 / 12</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     SLIDE 8 — DRONE AGRI DEEP DIVE
+══════════════════════════════════════════════════════════════════════════ -->
+<section class="slide s5" id="s7">
+  <div class="blob blob-green"  style="width:420px;height:420px;top:-80px;right:-80px;"></div>
+  <div class="blob blob-blue"   style="width:300px;height:300px;bottom:-60px;left:-60px;"></div>
+
+  <div class="slide-inner">
+    <div class="slide-tag">Deep Dive · Solution Spotlight</div>
+    <h2 style="margin-bottom:6px;">🚁 Drone + GPS-Based <span class="gradient-text">Agri Loan Assessment</span></h2>
+    <p style="margin-bottom:24px; max-width:800px;">
+      AIxBI brings hands-on GPS &amp; drone expertise to deliver India's most field-accurate agricultural
+      credit assessment engine — purpose-built for Himachal Pradesh's mountainous, terrace-farming terrain.
+    </p>
+
+    <div style="display:flex;gap:0;align-items:stretch;flex-wrap:wrap;margin-bottom:22px;">
+      <div class="card" style="flex:1;min-width:140px;border-radius:14px 0 0 14px;border-right:none;text-align:center;padding:16px 10px;">
+        <div style="font-size:1.6rem;">🛰️</div>
+        <div style="font-weight:700;color:var(--accent);font-size:.82rem;margin:6px 0 4px;">1. GPS Survey</div>
+        <p style="font-size:.76rem;">RTK-GPS drone flies plot. Centimetre-accurate boundary &amp; area in &lt;30 min.</p>
+      </div>
+      <div style="display:flex;align-items:center;color:var(--border);font-size:1.2rem;padding:0 1px;">▶</div>
+      <div class="card" style="flex:1;min-width:140px;border-radius:0;border-left:none;border-right:none;text-align:center;padding:16px 10px;">
+        <div style="font-size:1.6rem;">🌿</div>
+        <div style="font-weight:700;color:var(--accent3);font-size:.82rem;margin:6px 0 4px;">2. Multispectral Imagery</div>
+        <p style="font-size:.76rem;">NDVI/NDRE indices per crop row. Stress zones, water-logging, growth stage.</p>
+      </div>
+      <div style="display:flex;align-items:center;color:var(--border);font-size:1.2rem;padding:0 1px;">▶</div>
+      <div class="card" style="flex:1;min-width:140px;border-radius:0;border-left:none;border-right:none;text-align:center;padding:16px 10px;">
+        <div style="font-size:1.6rem;">🧠</div>
+        <div style="font-weight:700;color:var(--accent2);font-size:.82rem;margin:6px 0 4px;">3. ML Yield Prediction</div>
+        <p style="font-size:.76rem;">XGBoost model trained on HP crop data predicts harvest yield &amp; market value.</p>
+      </div>
+      <div style="display:flex;align-items:center;color:var(--border);font-size:1.2rem;padding:0 1px;">▶</div>
+      <div class="card" style="flex:1;min-width:140px;border-radius:0;border-left:none;border-right:none;text-align:center;padding:16px 10px;">
+        <div style="font-size:1.6rem;">📋</div>
+        <div style="font-weight:700;color:var(--warn);font-size:.82rem;margin:6px 0 4px;">4. Auto Loan Report</div>
+        <p style="font-size:.76rem;">AI generates appraisal: collateral value, loan amount, repayment schedule.</p>
+      </div>
+      <div style="display:flex;align-items:center;color:var(--border);font-size:1.2rem;padding:0 1px;">▶</div>
+      <div class="card" style="flex:1;min-width:140px;border-radius:0 14px 14px 0;border-left:none;text-align:center;padding:16px 10px;">
+        <div style="font-size:1.6rem;">🏦</div>
+        <div style="font-weight:700;color:var(--accent3);font-size:.82rem;margin:6px 0 4px;">5. CBS Push</div>
+        <p style="font-size:.76rem;">Report auto-pushed into HPSCB CBS. Branch officer approves digitally.</p>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card" style="border-left:3px solid var(--accent3);">
+        <h3 style="color:var(--accent3); margin-bottom:10px;">Why This Matters for HP's Terrain</h3>
+        <ul style="list-style:none;color:#4a5568;font-size:.85rem;line-height:1.95;">
+          <li>🏔️ <strong style="color:#1a1f36;">80%+</strong> of HP farms on slopes / terraces — road-inaccessible in winter</li>
+          <li>🌾 <strong style="color:#1a1f36;">Crop diversity</strong> (apple, maize, wheat, off-season veg) — species-level ML models</li>
+          <li>📍 <strong style="color:#1a1f36;">GPS geo-fencing</strong> catches duplicate collateral pledged to multiple lenders</li>
+          <li>🌧️ <strong style="color:#1a1f36;">Post-disaster re-assessment</strong> (hailstorm, landslide) within 24 hrs for restructuring</li>
+          <li>🔄 <strong style="color:#1a1f36;">Continuous monitoring</strong> — seasonal drone flyovers flag early default risk</li>
+        </ul>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:12px; background:rgba(16,185,129,.08); border-color:rgba(16,185,129,.3);">
+          <h3 style="color:var(--accent); margin-bottom:10px;">AIxBI's GPS / Drone Edge</h3>
+          <ul style="list-style:none;color:#4a5568;font-size:.85rem;line-height:1.95;">
+            <li>✅ In-house GPS drone operations &amp; RTK expertise</li>
+            <li>✅ Custom orthomosaic &amp; 3D terrain model generation</li>
+            <li>✅ Integration with ISRO Bhuvan &amp; HP revenue land records</li>
+            <li>✅ Offline drone data processing (no cloud needed in field)</li>
+            <li>✅ DGCA-compliant operations across all HP districts</li>
+          </ul>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div class="card" style="text-align:center;padding:12px;"><div style="font-size:1.5rem;font-weight:800;color:var(--accent3);">70%</div><div style="font-size:.74rem;color:#4a5568;">Less field visit cost</div></div>
+          <div class="card" style="text-align:center;padding:12px;"><div style="font-size:1.5rem;font-weight:800;color:var(--accent);">±2%</div><div style="font-size:.74rem;color:#4a5568;">Yield prediction accuracy</div></div>
+          <div class="card" style="text-align:center;padding:12px;"><div style="font-size:1.5rem;font-weight:800;color:var(--warn);">3 hrs</div><div style="font-size:.74rem;color:#4a5568;">End-to-end loan report</div></div>
+          <div class="card" style="text-align:center;padding:12px;"><div style="font-size:1.5rem;font-weight:800;color:#a78bfa;">100%</div><div style="font-size:.74rem;color:#4a5568;">Auditable digital trail</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">8 / 13</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     SLIDE 9 — TECH STACK
+══════════════════════════════════════════════════════════════════════════ -->
+<section class="slide s8" id="s8">
+  <div class="blob blob-blue" style="width:400px;height:400px;top:-80px;left:-80px;"></div>
+
+  <div class="slide-inner">
+    <div class="slide-tag">Technology</div>
+    <h2 style="margin-bottom:8px;">Our <span class="gradient-text">Technology Stack</span></h2>
+    <p style="margin-bottom:32px; max-width:720px;">
+      Enterprise-proven, open-standards-based, and compliant with RBI / MEITY cloud policy.
+      Deployable on-premise, cloud, or hybrid.
+    </p>
+
+    <div class="grid-2">
+      <div>
+        <div class="card" style="margin-bottom:16px;">
+          <h3 style="color:var(--accent); margin-bottom:14px;">🧠 AI / ML Layer</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <span class="badge badge-blue">Python 3.11</span>
+            <span class="badge badge-blue">PyTorch / TensorFlow</span>
+            <span class="badge badge-blue">scikit-learn</span>
+            <span class="badge badge-blue">Hugging Face</span>
+            <span class="badge badge-blue">LangChain / LlamaIndex</span>
+            <span class="badge badge-blue">OpenCV</span>
+            <span class="badge badge-blue">Tesseract OCR</span>
+            <span class="badge badge-blue">Whisper ASR</span>
+          </div>
+        </div>
+        <div class="card" style="margin-bottom:16px;">
+          <h3 style="color:var(--accent2); margin-bottom:14px;">⚙️ MLOps / DevOps</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <span class="badge badge-purple">MLflow</span>
+            <span class="badge badge-purple">Airflow / Prefect</span>
+            <span class="badge badge-purple">Docker</span>
+            <span class="badge badge-purple">Kubernetes</span>
+            <span class="badge badge-purple">GitHub Actions</span>
+            <span class="badge badge-purple">Grafana / Prometheus</span>
+            <span class="badge badge-purple">Terraform</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:16px;">
+          <h3 style="color:var(--accent3); margin-bottom:14px;">🖥️ Full-Stack / APIs</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <span class="badge badge-green">React / Next.js</span>
+            <span class="badge badge-green">FastAPI / Django</span>
+            <span class="badge badge-green">Node.js</span>
+            <span class="badge badge-green">React Native</span>
+            <span class="badge badge-green">GraphQL</span>
+            <span class="badge badge-green">gRPC</span>
+          </div>
+        </div>
+        <div class="card" style="margin-bottom:16px;">
+          <h3 style="color:var(--warn); margin-bottom:14px;">🗄️ Data &amp; Cloud</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <span class="badge badge-warn">PostgreSQL / MySQL</span>
+            <span class="badge badge-warn">Apache Kafka</span>
+            <span class="badge badge-warn">Apache Spark</span>
+            <span class="badge badge-warn">dbt</span>
+            <span class="badge badge-warn">MinIO (On-Prem S3)</span>
+            <span class="badge badge-warn">NIC / MeghRaj Cloud</span>
+            <span class="badge badge-warn">Superset / Metabase</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px; background: rgba(16,185,129,.08); border-color: rgba(16,185,129,.3);">
+      <p style="font-size:.87rem; color:#4a5568;">
+        🔒 <strong style="color:#1a1f36;">Security:</strong>
+        All solutions follow OWASP, data-at-rest and in-transit encryption (AES-256, TLS 1.3),
+        role-based access control (RBAC), and audit logging — meeting RBI Cyber Security Framework and
+        ISO 27001 requirements.
+      </p>
+    </div>
+  </div>
+  <div class="slide-num">9 / 13</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     SLIDE 10 — ROADMAP
+══════════════════════════════════════════════════════════════════════════ -->
+<section class="slide s9" id="s9">
+  <div class="blob blob-purple" style="width:380px;height:380px;top:-60px;right:-60px;"></div>
+
+  <div class="slide-inner">
+    <div class="slide-tag">Execution Plan</div>
+    <h2 style="margin-bottom:8px;">Proposed <span class="gradient-text">Implementation Roadmap</span></h2>
+    <p style="margin-bottom:36px; max-width:720px;">
+      A phased approach balancing quick wins with long-term transformation —
+      starting with zero-disruption pilots on live data.
+    </p>
+
+    <div class="grid-2">
+      <div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-title">Phase 0 — Discovery &amp; Assessment (Month 1)</div>
+            <div class="tl-desc">Deep-dive workshops with HPSCB IT &amp; business teams.
+            CBS data audit, API mapping, security assessment, and solution finalisation.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-title">Phase 1 — Quick Wins (Month 2–4)</div>
+            <div class="tl-desc">
+              <strong style="color:#1a1f36;">Deploy:</strong> BI Dashboard (Branch KPIs) ·
+              AI KYC Assist (pilot 10 branches) · Fraud Rule Engine upgrade.<br/>
+              <em style="color:var(--accent3);">Visible ROI within 90 days.</em>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-title">Phase 2 — Core AI (Month 5–9)</div>
+            <div class="tl-desc">
+              Credit Scoring Engine (Agri + Home Loan) · Himpesa Chatbot (Hindi) ·
+              AML Transaction Monitoring · MLOps platform setup.
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-title">Phase 3 — Advanced Intelligence (Month 10–15)</div>
+            <div class="tl-desc">
+              Real-time Fraud Detection (GNN) · Personalisation Engine ·
+              Voice Banking · Predictive Analytics for Treasury &amp; Deposits.
+            </div>
+          </div>
+          <div class="tl-item" style="margin-bottom:0;">
+            <div class="tl-title">Phase 4 — Hyper-automation (Month 16+)</div>
+            <div class="tl-desc">
+              Full straight-through loan processing · AI-assisted audit · GenAI for
+              regulatory report drafting · Continuous model retraining pipeline.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div class="card">
+          <h3 style="color:var(--accent3); margin-bottom:14px;">Delivery Principles</h3>
+          <ul style="list-style:none; color:#4a5568; font-size:.88rem; line-height:2.1;">
+            <li>✅ Agile sprints (2-week cycles) with demo each sprint</li>
+            <li>✅ No disruption to live CBS operations</li>
+            <li>✅ Explainable AI — no black boxes for credit decisions</li>
+            <li>✅ On-premise first; cloud optional</li>
+            <li>✅ Full IP transfer &amp; source code access to HPSCB</li>
+            <li>✅ HPSCB staff training at each phase milestone</li>
+            <li>✅ Dedicated account manager + on-call support</li>
+          </ul>
+        </div>
+        <div class="card" style="background:rgba(0,212,255,.06); border-color:rgba(0,212,255,.3);">
+          <h3 style="color:var(--accent); margin-bottom:10px;">Engagement Model</h3>
+          <p style="font-size:.87rem;">We work as an embedded team —
+          our engineers sit alongside your IT staff, ensuring knowledge transfer and
+          no vendor lock-in. <strong style="color:#1a1f36;">Pilot → Prove → Scale.</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">10 / 13</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     SLIDE 11 — ROI
+══════════════════════════════════════════════════════════════════════════ -->
+<section class="slide s10" id="s10">
+  <div class="blob blob-green" style="width:400px;height:400px;bottom:-100px;left:-80px;"></div>
+
+  <div class="slide-inner">
+    <div class="slide-tag">Business Case</div>
+    <h2 style="margin-bottom:8px;">Expected <span class="gradient-text">Return on Investment</span></h2>
+    <p style="margin-bottom:28px; max-width:720px;">
+      Conservative estimates based on published industry benchmarks for similar-sized
+      regional banks adopting AI. Exact numbers will be validated during Phase 0.
+    </p>
+
+    <table style="margin-bottom:28px;">
+      <thead>
+        <tr>
+          <th>Solution</th>
+          <th>Investment (Est.)</th>
+          <th>Annual Saving / Gain</th>
+          <th>Payback Period</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>AI Credit Scoring</td>
+          <td>₹40–60 L</td>
+          <td class="green-cell">₹1.5–2 Cr/yr NPA reduction</td>
+          <td class="green-cell">4–6 months</td>
+        </tr>
+        <tr>
+          <td>Fraud Detection</td>
+          <td>₹30–50 L</td>
+          <td class="green-cell">₹80L–1.2 Cr/yr fraud averted</td>
+          <td class="green-cell">5–8 months</td>
+        </tr>
+        <tr>
+          <td>AI KYC &amp; AML</td>
+          <td>₹20–35 L</td>
+          <td class="green-cell">₹40–60 L/yr ops saving</td>
+          <td class="green-cell">8–10 months</td>
+        </tr>
+        <tr>
+          <td>BI / Analytics Platform</td>
+          <td>₹15–25 L</td>
+          <td class="green-cell">Better decisions → revenue ↑</td>
+          <td class="green-cell">6–9 months</td>
+        </tr>
+        <tr>
+          <td>AI Chatbot (Hindi)</td>
+          <td>₹20–30 L</td>
+          <td class="green-cell">₹25–40 L/yr call centre saving</td>
+          <td class="green-cell">9–12 months</td>
+        </tr>
+        <tr>
+          <td>MLOps / DevOps Infra</td>
+          <td>₹25–40 L</td>
+          <td class="green-cell">3× faster feature delivery</td>
+          <td class="green-cell">12–15 months</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="grid-3">
+      <div class="card" style="text-align:center; background:rgba(16,185,129,.08); border-color:rgba(16,185,129,.3);">
+        <div style="font-size:2rem; font-weight:800; color:var(--accent3);">₹4–6 Cr</div>
+        <div style="font-size:.8rem; color:#4a5568; margin-top:6px;">Estimated Annual Value Created (Year 2+)</div>
+      </div>
+      <div class="card" style="text-align:center; background:rgba(0,212,255,.06); border-color:rgba(0,212,255,.3);">
+        <div style="font-size:2rem; font-weight:800; color:var(--accent);">300–500%</div>
+        <div style="font-size:.8rem; color:#4a5568; margin-top:6px;">3-Year ROI across full AI portfolio</div>
+      </div>
+      <div class="card" style="text-align:center; background:rgba(124,58,237,.1); border-color:rgba(124,58,237,.3);">
+        <div style="font-size:2rem; font-weight:800; color:#a78bfa;">₹1.5–2.5 Cr</div>
+        <div style="font-size:.8rem; color:#4a5568; margin-top:6px;">Indicative Phase 1–2 Investment</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">11 / 13</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     SLIDE 12 — WHY AIxBI
+══════════════════════════════════════════════════════════════════════════ -->
+<section class="slide s11" id="s11">
+  <div class="blob blob-blue" style="width:420px;height:420px;top:-100px;right:-80px;"></div>
+
+  <div class="slide-inner">
+    <div class="slide-tag">Why Us</div>
+    <h2 style="margin-bottom:8px;">Why <span class="gradient-text">AIxBI</span> — and Not a Large IT Firm?</h2>
+    <p style="margin-bottom:32px; max-width:720px;">
+      Large SIs bill junior resources at senior rates. We are different — every engagement
+      is led by a practitioner with 15+ years of real-world AI/BFSI experience.
+    </p>
+
+    <div class="grid-2">
+      <div class="card" style="border-top: 3px solid var(--accent3);">
+        <table style="margin-top:0;">
+          <thead>
+            <tr><th>Dimension</th><th>Large IT Firm</th><th style="color:var(--accent3);">AIxBI</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Team on ground</td><td class="warn-cell">Junior-heavy pyramid</td><td class="green-cell">Senior practitioners only</td></tr>
+            <tr><td>Avg. experience</td><td class="warn-cell">5–8 yrs blended</td><td class="green-cell">15+ yrs per person</td></tr>
+            <tr><td>AI depth</td><td class="warn-cell">Packaged tools/SaaS</td><td class="green-cell">Custom models, fine-tuned LLMs</td></tr>
+            <tr><td>Decision speed</td><td class="warn-cell">Slow, multi-layer PMO</td><td class="green-cell">MD/CTO directly accessible</td></tr>
+            <tr><td>Cost model</td><td class="warn-cell">High overhead billed to client</td><td class="green-cell">Lean, value-based pricing</td></tr>
+            <tr><td>IP ownership</td><td class="warn-cell">Vendor retains IP / SaaS lock</td><td class="green-cell">Full IP to HPSCB</td></tr>
+            <tr><td>Govt compliance</td><td class="warn-cell">Generic</td><td class="green-cell">RBI / NABARD / MEITY aligned</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div class="card">
+          <h3 style="color:var(--accent); margin-bottom:12px;">Our Commitments to HPSCB</h3>
+          <ul style="list-style:none; color:#4a5568; font-size:.88rem; line-height:2.1;">
+            <li>🎯 Dedicated team, no staff rotation mid-project</li>
+            <li>🎯 Monthly steering committee with HPSCB leadership</li>
+            <li>🎯 Explainable AI reports in every credit decision</li>
+            <li>🎯 Data stays on-premise / within India at all times</li>
+            <li>🎯 3-year post-deployment support SLA</li>
+          </ul>
+        </div>
+        <div class="card" style="background:rgba(16,185,129,.08); border-color:rgba(16,185,129,.3);">
+          <h3 style="color:var(--accent3); margin-bottom:10px;">🤝 References Available</h3>
+          <p style="font-size:.87rem;">We can provide references from BFSI and government
+          sector engagements on request. A 2-week paid proof-of-concept
+          on HPSCB's own data is available to demonstrate capability before commitment.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">12 / 13</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     SLIDE 13 — CALL TO ACTION
+══════════════════════════════════════════════════════════════════════════ -->
+<section class="slide s12" id="s12">
+  <div class="blob blob-blue"   style="width:500px;height:500px;bottom:-120px;left:-150px;"></div>
+  <div class="blob blob-purple" style="width:350px;height:350px;top:-80px;right:-80px;"></div>
+
+  <div class="slide-inner" style="text-align:center;">
+    <div class="slide-tag" style="justify-content:center;">Next Steps</div>
+    <h2 style="margin-bottom:16px;">
+      Let's <span class="gradient-text">Build Tomorrow's Bank</span> Together
+    </h2>
+    <p style="max-width:640px; margin: 0 auto 40px; font-size:1.05rem;">
+      We invite the leadership of HPSCB for a 60-minute discovery call.
+      We will walk through a live demo tailored to HPSCB's data and pain points —
+      at no cost and no obligation.
+    </p>
+
+    <div class="grid-3" style="max-width:800px; margin:0 auto 40px; text-align:left;">
+      <div class="card" style="text-align:center;">
+        <div style="font-size:1.8rem; margin-bottom:8px;">📞</div>
+        <h3 style="color:var(--accent); margin-bottom:6px;">Step 1</h3>
+        <p style="font-size:.87rem;">Schedule a 60-min discovery call with our MD &amp; Chief AI Architect</p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div style="font-size:1.8rem; margin-bottom:8px;">🔬</div>
+        <h3 style="color:var(--accent2); margin-bottom:6px;">Step 2</h3>
+        <p style="font-size:.87rem;">2-week Proof of Concept on HPSCB's real data — see AI in action</p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div style="font-size:1.8rem; margin-bottom:8px;">🚀</div>
+        <h3 style="color:var(--accent3); margin-bottom:6px;">Step 3</h3>
+        <p style="font-size:.87rem;">Sign off on Phase 1 and go live with Quick Wins in 90 days</p>
+      </div>
+    </div>
+
+    <div class="divider" style="max-width:600px; margin:0 auto 32px;"></div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:24px;justify-content:center;margin-bottom:40px;">
+      <div>
+        <div style="font-size:.75rem; color:#4a5568; text-transform:uppercase; letter-spacing:.1em;">Website</div>
+        <div style="font-weight:600; color:var(--accent);">www.aixbi.net</div>
+      </div>
+      <div style="width:1px; background:var(--border);"></div>
+      <div>
+        <div style="font-size:.75rem; color:#4a5568; text-transform:uppercase; letter-spacing:.1em;">Phone</div>
+        <div style="font-weight:600; color:var(--accent);">+91-9971315556</div>
+      </div>
+      <div style="width:1px; background:var(--border);"></div>
+      <div>
+        <div style="font-size:.75rem; color:#4a5568; text-transform:uppercase; letter-spacing:.1em;">Email</div>
+        <div style="font-weight:600; color:var(--accent);">info@aixbi.net</div>
+      </div>
+      <div style="width:1px; background:var(--border);"></div>
+      <div>
+        <div style="font-size:.75rem; color:#4a5568; text-transform:uppercase; letter-spacing:.1em;">Office</div>
+        <div style="font-weight:600; color:var(--accent); font-size:.85rem;">H-148, GF, Sector-63, Noida – 201301</div>
+      </div>
+    </div>
+
+    <p style="font-size:.78rem; color:rgba(255,255,255,.25); max-width:700px; margin:0 auto;">
+      This presentation is confidential and prepared exclusively for Himachal Pradesh State Co-operative Bank Ltd.
+      Financial estimates are illustrative and subject to detailed assessment. © 2026 AIxBI Pvt. Ltd. | H-148, GF, Sector-63, Noida – 201301 | www.aixbi.net
+    </p>
+  </div>
+  <div class="slide-num">13 / 13</div>
+</section>
+
+<!-- ─── Navigation Script ──────────────────────────────────────────────────── -->
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const dots   = document.querySelectorAll('.dot');
+
+  function goto(idx) {
+    slides[idx].scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Intersection Observer to highlight active dot
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const i = Array.from(slides).indexOf(entry.target);
+        dots.forEach(d => d.classList.remove('active'));
+        if (dots[i]) dots[i].classList.add('active');
+      }
+    });
+  }, { threshold: 0.5 });
+
+  slides.forEach(s => observer.observe(s));
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    const active = Array.from(dots).findIndex(d => d.classList.contains('active'));
+    if (e.key === 'ArrowDown' || e.key === 'PageDown') goto(Math.min(active + 1, slides.length - 1));
+    if (e.key === 'ArrowUp'   || e.key === 'PageUp')   goto(Math.max(active - 1, 0));
+  });
+</script>
+</body>
+</html>
